@@ -1,0 +1,2183 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>برنامج القيادة وإدارة التغيير في عصر الذكاء الاصطناعي - NCASE</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="image/web_logo_icon-removebg-preview.png"
+    />
+
+    <!-- Required fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --primary: #4a1a75;
+        --primary-light: #7a3ba1;
+        --primary-bg: #f5f1f7;
+        --text-dark: #1f2024;
+        --text-muted: #6b7280;
+        --white: #ffffff;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.06);
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+      }
+
+      body {
+        font-family: "Cairo", "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        color: var(--text-dark);
+        background-color: var(--white);
+        line-height: 1.6;
+        direction: rtl;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Nav */
+      .event-header {
+        padding: 1rem 0;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--gray-100);
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-box {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-img {
+        height: 28px;
+      }
+
+      .organizer-tag {
+        background: var(--gray-100);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .btn-purple {
+        background: var(--primary);
+        color: var(--white);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 700;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-purple:hover {
+        background: #3c1261;
+        transform: translateY(-2px);
+      }
+
+      /* Hero */
+      .hero-section {
+        background-color: var(--primary-bg);
+        padding: 5rem 0 0rem;
+        position: relative;
+      }
+
+      .hero-content {
+        text-align: right;
+        padding-bottom: 3rem;
+      }
+
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        background: transparent;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1.2;
+        margin: 0 0 1rem 0;
+        color: var(--text-dark);
+      }
+
+      .hero-title .highlight {
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+      }
+
+      .hero-title .highlight::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        border-bottom: 4px dashed var(--primary);
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 800px;
+        margin-bottom: 3rem;
+        font-weight: 500;
+      }
+
+      /* Quick Info Bar */
+      .info-bar {
+        background: white;
+        border-radius: 12px;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        margin-bottom: 3rem;
+        border: 1px solid var(--gray-200);
+      }
+
+      .info-bar-left,
+      .info-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+      }
+
+      .info-item i {
+        width: 18px;
+        color: var(--primary);
+      }
+
+      .info-item.highlight-tag {
+        background: var(--primary-bg);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        color: var(--primary);
+        font-size: 0.9rem;
+      }
+
+      .btn-info {
+        background: transparent;
+        border: 1px solid var(--gray-200);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Pricing Row in Hero */
+      .hero-pricing-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .price-text {
+        text-align: right;
+        line-height: 1.2;
+      }
+
+      .price-text p {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      .price-text h3 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--text-dark);
+      }
+
+      .price-text .old-price {
+        text-decoration: line-through;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      /* Hero Stats Cards */
+      .hero-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .hero-stat-card {
+        background: white;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--gray-200);
+      }
+
+      .hero-stat-card h3 {
+        font-size: 2rem;
+        color: var(--primary);
+        font-weight: 900;
+        margin: 0 0 0.5rem;
+      }
+
+      .hero-stat-card p {
+        margin: 0;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      /* Dark Banner */
+      .dark-banner {
+        background-color: #3b1654;
+        color: white;
+        padding: 1rem 0;
+      }
+
+      .dark-banner-content {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .banner-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .banner-item i {
+        color: #d8b4fe;
+        width: 18px;
+      }
+
+      .banner-item-outline {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.35rem 1rem;
+        border-radius: 50px;
+        font-weight: 500;
+      }
+
+      /* Sections General */
+      .section-padded {
+        padding: 6rem 0;
+      }
+
+      .section-title-wrapper {
+        text-align: right;
+        margin-bottom: 3rem;
+      }
+
+      .section-pretitle {
+        color: var(--primary-light);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--text-dark);
+        margin: 0;
+      }
+
+      /* Layout Structure */
+      .two-column-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      /* Organizer Card */
+      .organizer-card {
+        background: var(--primary-bg);
+        border-radius: var(--radius-lg);
+        padding: 4rem;
+        position: relative;
+      }
+
+      .org-content-inner {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .org-header {
+        margin-bottom: 2rem;
+      }
+
+      .org-header h3 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .org-content p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+      }
+
+      .org-tags {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .org-tag {
+        border: 1px solid var(--gray-200);
+        padding: 0.5rem 1.5rem;
+        border-radius: 8px;
+        color: var(--primary);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        font-size: 0.9rem;
+      }
+
+      /* Challenges Grid (Masonry look) */
+      .challenges-section {
+        background: var(--primary-bg);
+      }
+
+      .challenges-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .challenge-card {
+        background: white;
+        border-radius: 8px;
+        padding: 2.5rem 2rem;
+        text-align: right;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .ch-num {
+        color: var(--primary-light);
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+        opacity: 0.8;
+      }
+
+      .challenge-card h3 {
+        font-size: 1.25rem;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        color: var(--text-dark);
+      }
+
+      .challenge-card p {
+        color: var(--text-muted);
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* Benefits Grid */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem;
+      }
+
+      .benefit-card {
+        background: white;
+        border-radius: 8px;
+        padding: 2.5rem 1.5rem;
+        text-align: right;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--gray-100);
+        position: relative;
+      }
+
+      .benefit-bg-num {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--primary-bg);
+        z-index: 0;
+        line-height: 1;
+      }
+
+      .benefit-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--primary-bg);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-icon i {
+        color: var(--primary);
+        font-size: 1.25rem;
+      }
+
+      .benefit-card h4 {
+        font-size: 1rem;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        position: relative;
+        z-index: 1;
+        color: var(--text-dark);
+      }
+
+      .benefit-card p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+        position: relative;
+        z-index: 1;
+        line-height: 1.6;
+      }
+
+      /* Instructor Section */
+      .instructor-section {
+        background-color: var(--primary-bg);
+      }
+
+      .instructor-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .instructor-content h2 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin: 0 0 0.5rem;
+        color: var(--primary);
+      }
+
+      .inst-title {
+        font-size: 1rem;
+        color: var(--primary-light);
+        font-weight: 700;
+        margin-bottom: 2rem;
+      }
+
+      .inst-desc {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .inst-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .inst-stat {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: 1px solid var(--gray-100);
+        flex-direction: row-reverse;
+      }
+
+      .inst-stat-icon {
+        background: var(--primary);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .inst-stat-text {
+        text-align: right;
+      }
+
+      .inst-stat-text h4 {
+        font-size: 1.2rem;
+        font-weight: 900;
+        margin: 0 0 0.25rem;
+        color: var(--text-dark);
+      }
+
+      .inst-stat-text p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      .instructor-card-img {
+        background: #e8e0eb;
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .inst-img-placeholder {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+      }
+
+      .inst-img-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .img-caption {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .instructor-card-img h3 {
+        font-size: 1.25rem;
+        font-weight: 900;
+        margin: 0 0 0.25rem;
+        color: var(--text-dark);
+      }
+
+      .instructor-card-img p {
+        color: var(--primary-light);
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin: 0 0 1.5rem;
+      }
+
+      .inst-mini-stats {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
+
+      .mini-stat {
+        background: white;
+        padding: 0.75rem;
+        border-radius: 8px;
+        flex: 1;
+        border: 1px solid var(--gray-200);
+      }
+
+      .mini-stat h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 900;
+        color: var(--primary);
+      }
+
+      .mini-stat span {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        display: block;
+        margin-top: 0.25rem;
+        font-weight: 600;
+      }
+
+      .footer-awards {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .award-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+
+      .award-item i {
+        color: #f59e0b;
+        width: 16px;
+      }
+
+      /* General Adjustments */
+      @media (max-width: 1024px) {
+        .hero-title {
+          font-size: 3.5rem;
+        }
+
+        .challenges-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .benefits-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .instructor-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .info-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .info-bar-left,
+        .info-bar-right {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+
+        .hero-stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .dark-banner-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .challenges-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .inst-stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-awards {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        .hero-pricing-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .audience-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-container {
+          flex-direction: column;
+        }
+
+        .pricing-card.purple-card {
+          margin: 0;
+          width: 100%;
+          border-radius: var(--radius-lg);
+        }
+
+        .pricing-card {
+          width: 100%;
+        }
+
+        .event-details-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+
+        .detail-card {
+          width: 100%;
+        }
+
+        .guarantee-bar {
+          flex-direction: column;
+          text-align: center;
+          padding: 1.5rem;
+        }
+
+        .bottom-cta-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          border-top: none;
+        }
+
+        .final-footer .container {
+          flex-direction: column;
+          text-align: center;
+          gap: 1.5rem;
+        }
+
+        .footer-contact {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .footer-logo-area {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .footer-logo-area p {
+          border: none;
+          padding: 0;
+        }
+      }
+
+      /* Target Audience Section */
+      .audience-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .audience-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 3rem 1.5rem;
+        text-align: center;
+        border: 1px solid var(--gray-200);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        transition: transform 0.3s;
+      }
+
+      .audience-card:hover {
+        border-color: var(--primary-light);
+        transform: translateY(-5px);
+      }
+
+      .audience-icon {
+        width: 60px;
+        height: 60px;
+        background: #fdfcff;
+        border: 1px solid #f1eef5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: var(--primary);
+        font-size: 1.5rem;
+        box-shadow: 0 4px 10px rgba(74, 26, 117, 0.05);
+      }
+
+      .audience-card h3 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin: 0 0 1rem;
+        line-height: 1.4;
+      }
+
+      .audience-card p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      /* Pricing Section */
+      .pricing-section {
+        background-color: var(--primary-bg);
+        padding: 5rem 0 6rem;
+        text-align: center;
+      }
+
+      .pricing-section .section-title-wrapper {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .pricing-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 900px;
+        margin: 0 auto;
+        gap: 0;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        background: white;
+      }
+
+      .pricing-card {
+        flex: 1;
+        padding: 3.5rem 2.5rem;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+
+      .pricing-card.purple-card {
+        background-color: #361154;
+        color: white;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 3.5rem 2.5rem;
+        margin: 0;
+        z-index: 1;
+      }
+
+      .pricing-card.white-card {
+        background-color: white;
+        border-radius: 0;
+        box-shadow: none;
+        z-index: 1;
+        padding-right: 3.5rem;
+        padding-left: 2.5rem;
+      }
+
+      .pricing-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(168, 85, 247, 0.2);
+        color: #d8b4fe;
+        padding: 0.4rem 1.25rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+      }
+
+      .pricing-header p {
+        font-size: 0.95rem;
+        margin: 0 0 0.5rem;
+        opacity: 0.9;
+      }
+
+      .pricing-header h2 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+
+      .pricing-header h2 span {
+        font-size: 1.25rem;
+        font-weight: 700;
+        opacity: 0.9;
+      }
+
+      .pricing-save-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        margin-bottom: 2.5rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .pricing-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3rem 0;
+        flex-grow: 1;
+      }
+
+      .pricing-features li {
+        position: relative;
+        padding-right: 1.75rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .pricing-features li::before {
+        content: "✓";
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-weight: bold;
+      }
+
+      .purple-card .pricing-features li {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .purple-card .pricing-features li::before {
+        color: #d8b4fe;
+      }
+
+      .white-card .pricing-header h2 {
+        color: var(--text-dark);
+      }
+
+      .white-card .pricing-header p {
+        color: var(--text-muted);
+      }
+
+      .white-card .pricing-features li {
+        color: var(--text-muted);
+      }
+
+      .white-card .pricing-features li::before {
+        color: var(--primary);
+      }
+
+      .pricing-btn-primary {
+        background: white;
+        color: #361154;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pricing-btn-primary:hover {
+        background: var(--gray-100);
+      }
+
+      .pricing-btn-outline {
+        background: transparent;
+        color: var(--primary);
+        width: 100%;
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s;
+        border: 1px solid var(--gray-200);
+      }
+
+      .pricing-btn-outline:hover {
+        background: var(--primary-bg);
+        border-color: var(--primary);
+      }
+
+      /* Event Details Row */
+      .event-details-section {
+        padding: 4rem 0 3rem;
+        background: var(--primary-bg);
+      }
+
+      .event-details-grid {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .detail-card {
+        background: white;
+        border: 1px solid var(--gray-100);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem 1rem;
+        width: 135px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s;
+      }
+
+      .detail-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .detail-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+      }
+
+      .detail-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .detail-value {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .guarantee-bar {
+        background: #f0f7ff;
+        border-radius: var(--radius-lg);
+        padding: 1.5rem 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: right;
+        gap: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #e0efff;
+      }
+
+      .guarantee-icon {
+        width: 45px;
+        height: 45px;
+        background: #3b82f6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+      }
+
+      .guarantee-icon i {
+        color: white;
+        font-size: 1.25rem;
+      }
+
+      .guarantee-content h4 {
+        margin: 0 0 0.25rem;
+        font-size: 1.15rem;
+        color: #1e3a8a;
+        font-weight: 800;
+      }
+
+      .guarantee-content p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #4b5563;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* Bottom CTA */
+      .bottom-cta-section {
+        background: #2b1042;
+        color: white;
+        text-align: center;
+        padding: 7rem 0;
+        position: relative;
+      }
+
+      .cta-rocket-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 1.5rem;
+        color: #d8b4fe;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .bottom-cta-title {
+        font-size: 3rem;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        line-height: 1.3;
+      }
+
+      .bottom-cta-desc {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 3.5rem;
+        font-weight: 500;
+      }
+
+      .btn-white {
+        background: white;
+        color: var(--text-dark);
+        padding: 1.15rem 3.5rem;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 900;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 4rem;
+        transition: all 0.3s;
+      }
+
+      .btn-white:hover {
+        background: var(--gray-100);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .bottom-cta-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 800px;
+        margin: 0 auto;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+      }
+
+      .bottom-cta-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .bottom-cta-links a:hover {
+        color: white;
+      }
+
+      .bottom-cta-links span {
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Final Dark Footer */
+      .final-footer {
+        background: #15091f;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 2.5rem 0;
+        font-size: 0.9rem;
+      }
+
+      .final-footer .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-logo-area {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .footer-logo-area p {
+        margin: 0;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        padding-left: 1rem;
+      }
+
+      .footer-logo-area img {
+        height: 20px;
+        opacity: 0.7;
+        filter: brightness(0) invert(1);
+      }
+
+      .footer-contact {
+        text-align: left;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .footer-contact p {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .footer-contact p i {
+        color: #d8b4fe;
+        width: 14px;
+      }
+
+      /* ===== Push Notification Popup ===== */
+      .push-notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%) scale(0.9);
+        pointer-events: none;
+        background: white;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 15px;
+        width: 420px;
+        max-width: calc(100vw - 40px);
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border: 1px solid rgba(86, 18, 105, 0.1);
+      }
+
+      .push-notification.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      [dir="rtl"] .push-notification {
+        left: 50%;
+        right: auto;
+      }
+
+      .push-icon {
+        width: 65px;
+        height: 65px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+        margin-bottom: 5px;
+      }
+
+      .push-icon svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      .push-content {
+        flex-grow: 1;
+      }
+
+      .push-content h4 {
+        margin: 0 0 10px 0;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary);
+        font-family: "Plus Jakarta Sans", "Cairo", sans-serif;
+      }
+
+      .push-content p {
+        margin: 0 0 20px 0;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .push-btn {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(86, 18, 105, 0.2);
+        box-sizing: border-box;
+      }
+
+      .push-btn:hover {
+        background: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(86, 18, 105, 0.3);
+      }
+
+      .push-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.05);
+        border: none;
+        color: var(--text-dark);
+        cursor: pointer;
+        font-size: 1.2rem;
+        line-height: 1;
+        padding: 0;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+      }
+
+      .push-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+        color: var(--primary);
+      }
+
+      [dir="rtl"] .push-close {
+        right: auto;
+        left: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header Navigation -->
+    <header class="event-header">
+      <div class="container header-inner">
+        <div class="logo-box">
+          <a href="index.html"
+            ><img src="image/تصميم بدون عنوان.png" alt="NCASE" class="logo-img"
+          /></a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem">
+          <span class="organizer-tag"
+            >الجهة المنظمة: <strong>إن كيس</strong></span
+          >
+          <a
+            href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+            target="_blank"
+            class="btn-purple"
+          >
+            <i data-lucide="arrow-left" style="width: 16px; height: 16px"></i>
+            احجز مقعدك
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="hero-label">برنامج تنفيذي متخصص - الرياض</div>
+
+        <h1 class="hero-title">
+          برنامج القيادة
+          <br />
+          <span class="highlight">وإدارة التغيير</span>
+          <br />
+          في عصر الذكاء الاصطناعي
+        </h1>
+
+        <p class="hero-subtitle">
+          برنامج تدريبي متخصص تنظّمه شركة إن كيس للاستشارات لتزويد أصحاب الشركات
+          وصُنّاع القرار بالأطر العملية لقيادة التغيير ودعم التطوير المؤسسي في
+          عصر الذكاء الاصطناعي.
+        </p>
+
+        <div class="info-bar">
+          <div class="info-bar-right">
+            <div class="info-item">
+              المدرب المتخصص: <strong>د. محمود مقصود خان</strong>
+            </div>
+          </div>
+          <div class="info-bar-left">
+            <div class="info-item highlight-tag">
+              <i data-lucide="shield-check"></i> +25 عاماً خبرة
+            </div>
+            <div class="info-item highlight-tag">
+              <i data-lucide="award"></i> جوائز دولية
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-pricing-row">
+          <a
+            href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+            target="_blank"
+            class="btn-purple"
+            style="font-size: 1.1rem; padding: 1rem 2.5rem; border-radius: 12px"
+          >
+            <i data-lucide="arrow-left"></i>
+            احجز مقعدك الآن
+          </a>
+          <div class="price-text">
+            <p>السعر الإجمالي</p>
+            <h3>1,700 <span>ريال</span></h3>
+            <span class="old-price">بدلاً من 2000 ريال</span>
+          </div>
+        </div>
+
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card">
+            <h3>50+</h3>
+            <p>شركة كبرى تلقت استشاراته</p>
+          </div>
+          <div class="hero-stat-card">
+            <h3>يومان</h3>
+            <p>من لا شيء حتى 12 مساءً</p>
+            <!-- Using placeholder based on screenshot text structure -->
+          </div>
+          <div class="hero-stat-card">
+            <h3>25+</h3>
+            <p>عاماً خبرة المدرب في الموارد البشرية</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Banner -->
+      <div class="dark-banner">
+        <div class="container dark-banner-content">
+          <div class="banner-item">
+            <i data-lucide="map-pin"></i> الرياض، المملكة العربية السعودية
+          </div>
+          <div class="banner-item">
+            <i data-lucide="users"></i> مقاعد محدودة - سارع بالتسجيل
+          </div>
+          <div class="banner-item banner-item-outline">
+            <i data-lucide="calendar"></i> [التاريخ يُحدد قريباً]
+          </div>
+          <div
+            class="banner-item banner-item-outline"
+            style="border-radius: 50px"
+          >
+            <i data-lucide="tag"></i> حجز مبكر 1,700 ريال
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Organizer Section -->
+    <section class="section-padded">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">الجهة المنظمة للبرنامج</span>
+          <h2 class="section-title">من يـنظم البرنامج التدريبي؟</h2>
+        </div>
+
+        <div class="organizer-card">
+          <div class="org-content-inner">
+            <div class="org-header">
+              <span
+                class="section-pretitle"
+                style="
+                  color: var(--text-muted);
+                  font-size: 0.9rem;
+                  margin-bottom: 1rem;
+                  display: block;
+                "
+                >الجهة المنظمة والمستضيفة</span
+              >
+              <h3>إن كيس للاستشارات — NCASE</h3>
+            </div>
+            <div class="org-content">
+              <p>
+                تعمل شركة إن كيس للاستشارات على تطوير خطط استراتيجية وتصميم
+                نماذج نمو قابلة للتوسع لخدمة المؤسسات المتوسطة والكبيرة انطلاقًا
+                من مقراتها في الرياض ودبي. يأتي هذا البرنامج النوعي ضمن مبادرات
+                الشركة لتطوير القدرات والكفاءات القيادية حيث تستضيف الدكتور
+                محمود خان لتقديم هذه الدورة المتخصصة.
+              </p>
+            </div>
+            <div class="org-tags">
+              <div class="org-tag">
+                <i data-lucide="map-pin" style="width: 14px"></i> الرياض - دبي
+              </div>
+              <div class="org-tag">
+                <i data-lucide="target" style="width: 14px"></i> استشارات
+                استراتيجية
+              </div>
+              <div class="org-tag">
+                <i data-lucide="trending-up" style="width: 14px"></i> تطوير
+                المؤسسات
+              </div>
+              <div class="org-tag">
+                <i data-lucide="globe" style="width: 14px"></i> ncase.com.sa
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="section-padded challenges-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">لماذا هذا البرنامج؟</span>
+          <h2 class="section-title">
+            هل تواجه هذه
+            <span style="color: var(--primary)">التحديات</span> كقيادي في عملك؟
+          </h2>
+          <p class="section-subtitle" style="margin-left: auto">
+            يأتي هذا البرنامج لمعالجة التحديات الإدارية المعاصرة ودعم استقرار
+            المنظمات.
+          </p>
+        </div>
+
+        <div class="challenges-grid">
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 01</span>
+            <h3>تراجع الدافع للتغيير أثناء التنفيذ</h3>
+            <p>
+              مقاومة فرق العمل تضعف زخم المبادرات وتعيق الوصول إلى الأهداف
+              المرسومة.
+            </p>
+          </div>
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 02</span>
+            <h3>الحاجة إلى أدوات تنفيذية دقيقة</h3>
+            <p>
+              تحويل الرؤى الاستراتيجية إلى خطط تنفيذية قابلة للقياس يتطلب منهجية
+              واضحة.
+            </p>
+          </div>
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 03</span>
+            <h3>تأثير الثقافة التنظيمية التقليدية</h3>
+            <p>
+              البيئة التنظيمية التقليدية تُبطئ تبني الأنظمة الحديثة وتعيق مسيرة
+              التطوير.
+            </p>
+          </div>
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 04</span>
+            <h3>القلق من الذكاء الاصطناعي وعدم توظيفه</h3>
+            <p>
+              عدم القدرة على استخدام الذكاء الاصطناعي بكفاءة يُفوت فرصاً تنافسية
+              حقيقية.
+            </p>
+          </div>
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 05</span>
+            <h3>غياب المواءمة بين الفريق القيادي</h3>
+            <p>
+              عدم التوافق بين أعضاء القيادة يُشتت الجهود ويُعيق بلوغ الأهداف
+              الكبرى.
+            </p>
+          </div>
+          <div class="challenge-card">
+            <span class="ch-num">التحدي 06</span>
+            <h3>ضعف أساليب القيادة التحفيزية</h3>
+            <p>
+              أسلوب القيادة الذي يُلهم ويبني الولاء المؤسسي المستدام يحتاج إلى
+              تطوير مستمر.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section class="section-padded">
+      <div class="container">
+        <div class="section-title-wrapper" style="text-align: right">
+          <span class="section-pretitle">ماذا ستحقق؟</span>
+          <h2 class="section-title">ما الفائدة التي سيحققها البرنامج لك؟</h2>
+          <p class="section-subtitle" style="margin-right: 0">
+            يكتسب المشاركون أدوات عملية وخبرة استراتيجية جاهزة للتطبيق الفوري.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-bg-num">01</div>
+            <div class="benefit-icon"><i data-lucide="compass"></i></div>
+            <h4>تعزيز القدرة القيادية على إدارة التحول</h4>
+            <p>
+              تطوير فهم استراتيجي لدور القائد في استشراف التغيير وصناعة التوجه
+              المستقبلي للمنظمة.
+            </p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-bg-num">02</div>
+            <div class="benefit-icon"><i data-lucide="settings"></i></div>
+            <h4>إطار عملي لإدارة التغيير وتنفيذه</h4>
+            <p>
+              اكتساب إطار عملي لإدارة التغيير وتحويل الخطط إلى نتائج قابلة
+              للقياس والتتبع.
+            </p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-bg-num">03</div>
+            <div class="benefit-icon"><i data-lucide="shield"></i></div>
+            <h4>التعامل مع مقاومة التغيير وبناء ثقافة داعمة</h4>
+            <p>
+              أدوات عملية للتعامل مع مقاومة التغيير وبناء ثقافة تنظيمية مشاركة
+              وداعمة للتحول.
+            </p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-bg-num">04</div>
+            <div class="benefit-icon"><i data-lucide="users"></i></div>
+            <h4>مواءمة الثقافة التنظيمية وأدوار القيادات</h4>
+            <p>
+              فهم دور الثقافة التنظيمية وتكامل الأدوار القيادية في دعم الأداء
+              المؤسسي المستمر.
+            </p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-bg-num">05</div>
+            <div class="benefit-icon"><i data-lucide="cpu"></i></div>
+            <h4>استكشاف تقنيات الذكاء الاصطناعي في القرار</h4>
+            <p>
+              استكشاف تقنيات الذكاء الاصطناعي في دعم اتخاذ القرار وتحسين كفاءة
+              المؤسسات.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="section-padded instructor-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">خبير البرنامج التدريبي</span>
+          <h2 class="section-title">الدكتور محمود مقصود خان</h2>
+        </div>
+
+        <div class="instructor-wrapper">
+          <div class="instructor-content">
+            <h2 style="font-size: 2.2rem; color: var(--text-dark)">
+              د. محمود مقصود خان
+            </h2>
+            <div class="inst-title">
+              مستشار تنفيذي أول - خبير الموارد البشرية وجودة الخدمات · KSA
+            </div>
+            <p class="inst-desc">
+              يمتلك الدكتور محمود خان خبرة مهنية تتجاوز 25 عاما في مجالات
+              الموارد البشرية وإدارة جودة الخدمات، يبرز اسمه كأحد رواد
+              الاستشارات القيادية في المملكة العربية السعودية والخليج العربي.
+              تولى مناصب إدارية عليا تشمل الإدارة العامة للموارد البشرية
+              والتصنيع في مجموعة صافولا. وقدم استشارات متخصصة لأكثر من 50 شركة
+              كبرى. وقدم برامج تدريبية لقادة في مدن عالمية متعددة من واشنطن إلى
+              دبي والرياض.
+            </p>
+            <p
+              style="
+                font-weight: 700;
+                color: var(--text-muted);
+                margin-bottom: 2rem;
+                font-size: 0.95rem;
+              "
+            >
+              يشارك في هذا البرنامج بصفته
+              <strong style="color: var(--primary)"
+                >المدرب المتخصص المدعو</strong
+              >
+              من شركة إن كيس لتقديم هذه الدورة النوعية.
+            </p>
+
+            <div class="inst-stats-grid">
+              <div class="inst-stat">
+                <div class="inst-stat-icon">
+                  <i data-lucide="briefcase"></i>
+                </div>
+                <div class="inst-stat-text">
+                  <h4>+25 عاماً</h4>
+                  <p>خبرة في تدريب الموارد البشرية</p>
+                </div>
+              </div>
+              <div class="inst-stat">
+                <div class="inst-stat-icon">
+                  <i data-lucide="line-chart"></i>
+                </div>
+                <div class="inst-stat-text">
+                  <h4>+12 عاماً</h4>
+                  <p>في الإدارة وجودة الخدمات</p>
+                </div>
+              </div>
+              <div class="inst-stat">
+                <div class="inst-stat-icon">
+                  <i data-lucide="building-2"></i>
+                </div>
+                <div class="inst-stat-text">
+                  <h4>+50 شركة</h4>
+                  <p>كبرى تلقت استشاراته</p>
+                </div>
+              </div>
+              <div class="inst-stat">
+                <div class="inst-stat-icon"><i data-lucide="globe"></i></div>
+                <div class="inst-stat-text">
+                  <h4>+20 مدينة</h4>
+                  <p>عالمية قدم فيها برامجه</p>
+                </div>
+              </div>
+              <div class="inst-stat">
+                <div class="inst-stat-icon">
+                  <i data-lucide="lightbulb"></i>
+                </div>
+                <div class="inst-stat-text">
+                  <h4>براءتا اختراع</h4>
+                  <p>مسجلتان في الولايات المتحدة</p>
+                </div>
+              </div>
+              <div class="inst-stat">
+                <div class="inst-stat-icon"><i data-lucide="award"></i></div>
+                <div class="inst-stat-text">
+                  <h4>جوائز دولية</h4>
+                  <p>للتميز في الشرق الأوسط وآسيا</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-awards">
+              <div class="award-item">
+                <i data-lucide="award"></i> جائزة التدريس المتميز - KFUPM
+              </div>
+              <div class="award-item">
+                <i data-lucide="award"></i> جائزة التميز في الموارد البشرية
+                بالشرق الأوسط 2008
+              </div>
+              <div class="award-item">
+                <i data-lucide="award"></i> جائزة المؤتمر العالمي للموارد
+                البشرية في آسيا 2010
+              </div>
+            </div>
+          </div>
+
+          <div class="instructor-card-img">
+            <div class="inst-img-placeholder">
+              <img src="image/placeholder_person.png" alt="Instructor" />
+            </div>
+            <div class="img-caption">— ضع صورة المدرب هنا</div>
+
+            <h3>د. محمود مقصود خان</h3>
+            <p>مستشار تنفيذي أول - المملكة العربية السعودية</p>
+            <div class="inst-mini-stats">
+              <div class="mini-stat">
+                <h5>20+</h5>
+                <span>مدينة عالمية</span>
+              </div>
+              <div class="mini-stat">
+                <h5>50+</h5>
+                <span>شركة عميلة</span>
+              </div>
+              <div class="mini-stat">
+                <h5>25+</h5>
+                <span>عاماً خبرة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="section-padded">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">الفئة المستهدفة</span>
+          <h2 class="section-title">
+            من يمكنه الاستفادة من البرنامج التدريبي؟
+          </h2>
+          <p class="section-subtitle" style="margin-right: 0">
+            هذا البرنامج لك أنت إذا كنت تعمل ضمن الفئات التالية:
+          </p>
+        </div>
+
+        <div class="audience-grid">
+          <div class="audience-card">
+            <div class="audience-icon"><i data-lucide="building-2"></i></div>
+            <h3>أصحاب الشركات</h3>
+            <p>الذين يعملون على تطوير شركاتهم وتحقيق سمعة قوية ومستدامة لها.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon"><i data-lucide="briefcase"></i></div>
+            <h3>الرؤساء التنفيذيون والمدراء العامون</h3>
+            <p>الباحثون عن أدوات قيادية ذات تأثير حقيقي ومثبت.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon"><i data-lucide="users"></i></div>
+            <h3>مديرو الموارد البشرية والتطوير المؤسسي</h3>
+            <p>المهتمون بتطبيق مبادرات التغيير وتحقيق أهداف التطوير المؤسسي.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon"><i data-lucide="compass"></i></div>
+            <h3>القيادات الإدارية الطموحة</h3>
+            <p>
+              المتطلعة إلى تطوير مهارات التحول الاستراتيجي والارتقاء بأدوارها
+              القيادية.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">التسجيل والاستثمار</span>
+          <h2 class="section-title">
+            استثمر الآن نحو
+            <span
+              style="
+                color: var(--primary);
+                border-bottom: 3px dashed var(--primary);
+              "
+              >التغيير</span
+            >
+          </h2>
+          <p class="section-subtitle" style="margin: 1rem auto">
+            سجل الآن لتحظى بتوفير 300 ريال - مقاعد محدودة لضمان جودة التفاعل.
+          </p>
+        </div>
+
+        <div class="pricing-container">
+          <!-- Purple Card (Early Bird Price) -->
+          <div class="pricing-card purple-card">
+            <div>
+              <span class="pricing-tag"
+                ><i data-lucide="zap" style="width: 14px; color: #fcd34d"></i>
+                حجز مبكر</span
+              >
+            </div>
+            <div class="pricing-header">
+              <p>التسجيل المبكر - وفّر الآن</p>
+              <h2>1,700 <span>ريال</span></h2>
+              <span class="pricing-save-tag"
+                >توفير 300 ريال
+                <i
+                  data-lucide="arrow-down"
+                  style="width: 14px; margin-right: 0.25rem"
+                ></i
+              ></span>
+            </div>
+            <ul class="pricing-features">
+              <li>حضور اليومين التدريبيين كاملة</li>
+              <li>مواد تدريبية احترافية</li>
+              <li>شهادة إتمام معتمدة من إن كيس</li>
+              <li>أطر وأدوات عملية جاهزة للتطبيق</li>
+              <li>الانضمام لمجتمع القادة</li>
+              <li style="color: #fcd34d">
+                أولوية في اختيار المقاعد
+                <i
+                  data-lucide="star"
+                  style="
+                    width: 14px;
+                    margin-right: 0.25rem;
+                    display: inline-block;
+                  "
+                ></i>
+              </li>
+            </ul>
+            <a
+              href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+              target="_blank"
+              class="pricing-btn-primary"
+              ><i
+                data-lucide="arrow-left"
+                style="
+                  width: 18px;
+                  display: inline-block;
+                  vertical-align: middle;
+                  margin-left: 0.5rem;
+                "
+              ></i>
+              احجز بسعر التسجيل المبكر</a
+            >
+          </div>
+          <!-- White Card (Regular Price) -->
+          <div class="pricing-card white-card">
+            <div class="pricing-header">
+              <p>السعر الأساسي</p>
+              <h2>2,000 <span>ريال</span></h2>
+            </div>
+            <ul class="pricing-features">
+              <li>حضور اليومين التدريبيين كاملة</li>
+              <li>مواد تدريبية احترافية</li>
+              <li>شهادة إتمام معتمدة من إن كيس</li>
+              <li>أطر وأدوات عملية جاهزة للتطبيق</li>
+              <li>الانضمام لمجتمع القادة</li>
+            </ul>
+            <a
+              href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+              target="_blank"
+              class="pricing-btn-outline"
+              >التسجيل بالسعر العادي</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Small Details Row -->
+    <section
+      class="event-details-section"
+      style="background: var(--primary-bg)"
+    >
+      <div class="container">
+        <div class="event-details-grid">
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="building-2"></i>
+            </div>
+            <div class="detail-label">المنظم</div>
+            <div class="detail-value">إن كيس</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="detail-label">المدرب</div>
+            <div class="detail-value">د. محمود خان</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="map-pin"></i>
+            </div>
+            <div class="detail-label">المكان</div>
+            <div class="detail-value">[يُضاف قريباً]</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="calendar"></i>
+            </div>
+            <div class="detail-label">التاريخ</div>
+            <div class="detail-value">[يُضاف قريباً]</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="clock"></i>
+            </div>
+            <div class="detail-label">التوقيت</div>
+            <div class="detail-value">5م - 10م</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-icon" style="color: var(--primary)">
+              <i data-lucide="award"></i>
+            </div>
+            <div class="detail-label">الشهادة</div>
+            <div class="detail-value">معتمدة NCASE</div>
+          </div>
+        </div>
+
+        <div class="guarantee-bar">
+          <div class="guarantee-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div class="guarantee-content">
+            <h4>ضمان القيمة الكاملة</h4>
+            <p>
+              إذا لم تجد قيمة تنفيذية فعلية بعد اليوم الأول، نضمن لك استرداد
+              رسوم التسجيل كاملة - بدون أي أسئلة.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Bar -->
+    <section class="bottom-cta-section">
+      <div class="container">
+        <div class="cta-rocket-icon"><i data-lucide="rocket"></i></div>
+        <h2 class="bottom-cta-title">خطوة متقدمة<br />نحو الريادة المؤسسية</h2>
+        <p class="bottom-cta-desc">
+          يمثل الانضمام لهذا البرنامج استثماراً استراتيجياً في مستقبل شركتك
+          ودعماً لقدرتك نحو القيادة المهنية.
+        </p>
+
+        <a
+          href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+          target="_blank"
+          class="btn-white"
+        >
+          <i data-lucide="arrow-left" style="width: 20px"></i>
+          سجّل الآن
+        </a>
+
+        <div class="bottom-cta-links">
+          <p>
+            للاستفسار والتسجيل المؤسسي:
+            <a href="https://ncase.com.sa">ncase.com.sa</a> <span>|</span>
+            <a href="tel:+966550650292">966 55 065 0292+</a> <span>|</span>
+            <a href="mailto:info@ncase.com.sa">info@ncase.com.sa</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Dark Footer -->
+    <footer class="final-footer">
+      <div class="container">
+        <div class="footer-copy">جميع الحقوق محفوظة. إن كيس © 2026</div>
+
+        <div class="footer-logo-area">
+          <p>We Make Strategies Real - إن كيس للاستشارات الاستراتيجية</p>
+          <img src="image/تصميم بدون عنوان.png" alt="NCASE Logo" />
+        </div>
+
+        <div class="footer-contact">
+          <p>
+            <a
+              href="mailto:info@ncase.com.sa"
+              style="color: inherit; text-decoration: none"
+              >info@ncase.com.sa</a
+            >
+            <i data-lucide="mail"></i>
+          </p>
+          <p>
+            <a
+              href="tel:+966550650292"
+              style="color: inherit; text-decoration: none"
+              >+966 55 065 0292</a
+            >
+            <i data-lucide="phone"></i>
+          </p>
+          <p>الرياض - روشن بيزنس فرونت <i data-lucide="map-pin"></i></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <!-- Push Notification -->
+    <div class="push-notification" id="pushNotification">
+      <button
+        class="push-close"
+        onclick="
+          document.getElementById('pushNotification').classList.remove('show')
+        "
+      >
+        &times;
+      </button>
+      <div class="push-icon"><i data-lucide="bell"></i></div>
+      <div class="push-content">
+        <h4
+          data-ar="برنامج القيادة وإدارة التغيير"
+          data-en="Leadership & Change Management Program"
+        >
+          برنامج القيادة وإدارة التغيير
+        </h4>
+        <p
+          data-ar="سجل الآن في البرنامج التدريبي المتقدم مع د. محمود خان"
+          data-en="Register now for the advanced training program with Dr. Mahmoud Khan"
+        >
+          سجل الآن في البرنامج التدريبي المتقدم مع د. محمود خان
+        </p>
+        <a
+          href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+          target="_blank"
+          class="push-btn"
+          data-ar="التفاصيل والحجز"
+          data-en="Details & Booking"
+          >احجز مقعدك الآن</a
+        >
+      </div>
+    </div>
+    <script>
+      setTimeout(() => {
+        const push = document.getElementById("pushNotification");
+        if (push) {
+          push.classList.add("show");
+
+          // Optionally close it after 15 seconds automatically
+          // setTimeout(() => push.classList.remove('show'), 15000);
+        }
+        if (window.lucide) window.lucide.createIcons();
+      }, 3000);
+    </script>
+  </body>
+</html>

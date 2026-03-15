@@ -1293,6 +1293,245 @@
         right: auto;
         left: 15px;
       }
+      /* ===== Countdown Timer ===== */
+      .countdown-widget {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .countdown-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .countdown-label i {
+        color: #ef4444;
+        width: 14px;
+      }
+
+      .countdown-boxes {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .countdown-box {
+        background: var(--primary);
+        color: white;
+        border-radius: 8px;
+        padding: 0.4rem 0.6rem;
+        text-align: center;
+        min-width: 48px;
+      }
+
+      .countdown-box span {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .countdown-box small {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 600;
+        opacity: 0.8;
+        margin-top: 2px;
+      }
+
+      .countdown-sep {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      .early-bird-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fcd34d;
+        border-radius: 50px;
+        padding: 0.3rem 0.75rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .early-bird-badge i {
+        width: 12px;
+        color: #f59e0b;
+      }
+
+      /* Updated Hero - more dramatic */
+      .hero-section {
+        background: linear-gradient(150deg, #f5f1f7 0%, #ede8f0 50%, #e8e0f0 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(74,26,117,0.06) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .hero-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -150px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(74,26,117,0.05) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      /* Inline price+countdown layout */
+      .price-countdown-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      /* Pricing section override - simplified */
+      .price-simple-section {
+        background: var(--primary-bg);
+        padding: 5rem 0;
+        text-align: center;
+      }
+
+      .price-simple-card {
+        background: linear-gradient(135deg, #361154 0%, #5a2080 100%);
+        color: white;
+        border-radius: var(--radius-xl);
+        padding: 3rem 3.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 20px 60px rgba(54, 17, 84, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .price-simple-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 50%;
+      }
+
+      .price-simple-card .countdown-box {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .price-simple-card .countdown-label {
+        color: rgba(255,255,255,0.7);
+      }
+
+      .price-simple-card .countdown-sep {
+        color: rgba(255,255,255,0.5);
+      }
+
+      .price-simple-main {
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1;
+        margin: 1rem 0 0.5rem;
+      }
+
+      .price-simple-main span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        opacity: 0.8;
+      }
+
+      .price-simple-old {
+        font-size: 1rem;
+        text-decoration: line-through;
+        opacity: 0.5;
+        margin-bottom: 1.5rem;
+      }
+
+      .price-simple-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem;
+        text-align: right;
+      }
+
+      .price-simple-features li {
+        padding: 0.5rem 1.5rem 0.5rem 0;
+        font-size: 0.95rem;
+        font-weight: 600;
+        position: relative;
+        color: rgba(255,255,255,0.9);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .price-simple-features li:last-child {
+        border-bottom: none;
+      }
+
+      .price-simple-features li::before {
+        content: '✓';
+        position: absolute;
+        right: 0;
+        color: #c4b5fd;
+        font-weight: 900;
+      }
+
+      .price-cta-btn {
+        display: block;
+        background: white;
+        color: #361154;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 900;
+        font-size: 1.05rem;
+        text-align: center;
+        transition: all 0.3s;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      }
+
+      .price-cta-btn:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      }
+
+      /* ===== Location card upgrade ===== */
+      .location-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 800;
+        border-bottom: 1px dashed var(--primary);
+        transition: opacity 0.2s;
+      }
+      .location-link:hover { opacity: 0.7; }
+
       /* General Adjustments */
       @media (max-width: 1024px) {
         .hero-title {
@@ -1499,9 +1738,38 @@
             احجز مقعدك الآن
           </a>
           <div class="price-text">
-            <p>السعر الإجمالي</p>
+            <span class="early-bird-badge">
+              <i data-lucide="zap"></i> حجز مبكر - محدود
+            </span>
+            <p>سعر الحجز المبكر</p>
             <h3>1,700 <span>ريال</span></h3>
-            <span class="old-price">بدلاً من 2000 ريال</span>
+            <span class="old-price">بدلاً من 2,000 ريال</span>
+            <div class="countdown-widget" id="hero-countdown-widget">
+              <div class="countdown-label">
+                <i data-lucide="clock"></i> ينتهي العرض خلال:
+              </div>
+              <div class="countdown-boxes">
+                <div class="countdown-box">
+                  <span id="hero-cd-days">03</span>
+                  <small>أيام</small>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-box">
+                  <span id="hero-cd-hours">00</span>
+                  <small>ساعة</small>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-box">
+                  <span id="hero-cd-mins">00</span>
+                  <small>دقيقة</small>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-box">
+                  <span id="hero-cd-secs">00</span>
+                  <small>ثانية</small>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1512,8 +1780,7 @@
           </div>
           <div class="hero-stat-card">
             <h3>يومان</h3>
-            <p>من لا شيء حتى 12 مساءً</p>
-            <!-- Using placeholder based on screenshot text structure -->
+            <p>24 &amp; 25 أبريل 2026</p>
           </div>
           <div class="hero-stat-card">
             <h3>25+</h3>
@@ -1526,13 +1793,13 @@
       <div class="dark-banner">
         <div class="container dark-banner-content">
           <div class="banner-item">
-            <i data-lucide="map-pin"></i> الرياض، المملكة العربية السعودية
+            <i data-lucide="map-pin"></i> روش ريحان بروتانا — الرياض
           </div>
           <div class="banner-item">
             <i data-lucide="users"></i> مقاعد محدودة - سارع بالتسجيل
           </div>
           <div class="banner-item banner-item-outline">
-            <i data-lucide="calendar"></i> [التاريخ يُحدد قريباً]
+            <i data-lucide="calendar"></i> 24 &amp; 25 أبريل 2026
           </div>
           <div
             class="banner-item banner-item-outline"
@@ -1902,100 +2169,76 @@
       </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section">
+    <!-- Pricing Section - Early Bird Only -->
+    <section class="price-simple-section">
       <div class="container">
-        <div class="section-title-wrapper">
+        <div class="section-title-wrapper" style="text-align:center; margin-bottom:3rem;">
           <span class="section-pretitle">التسجيل والاستثمار</span>
           <h2 class="section-title">
-            استثمر الآن نحو
-            <span
-              style="
-                color: var(--primary);
-                border-bottom: 3px dashed var(--primary);
-              "
-              >التغيير</span
-            >
+            سارع قبل انتهاء عرض
+            <span style="color: var(--primary); border-bottom: 3px dashed var(--primary);">الحجز المبكر</span>
           </h2>
           <p class="section-subtitle" style="margin: 1rem auto">
-            سجل الآن لتحظى بتوفير 300 ريال - مقاعد محدودة لضمان جودة التفاعل.
+            مقاعد محدودة — وفّر 300 ريال بالتسجيل المبكر قبل انتهاء العرض.
           </p>
         </div>
 
-        <div class="pricing-container">
-          <!-- Purple Card (Early Bird Price) -->
-          <div class="pricing-card purple-card">
+        <div class="price-simple-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; position:relative; z-index:1;">
+            <div style="text-align:right;">
+              <span class="pricing-tag" style="margin-bottom:1rem;">
+                <i data-lucide="zap" style="width:14px; color:#fcd34d;"></i> حجز مبكر
+              </span>
+              <p style="margin:0 0 0.25rem; opacity:0.8; font-size:0.9rem;">سعر التسجيل المبكر - وفّر الآن</p>
+              <div class="price-simple-main">1,700 <span>ريال</span></div>
+              <div class="price-simple-old">بدلاً من 2,000 ريال</div>
+            </div>
             <div>
-              <span class="pricing-tag"
-                ><i data-lucide="zap" style="width: 14px; color: #fcd34d"></i>
-                حجز مبكر</span
-              >
+              <div class="countdown-label" style="color:rgba(255,255,255,0.7); margin-bottom:0.5rem;">
+                <i data-lucide="clock" style="width:14px;"></i> ينتهي العرض خلال:
+              </div>
+              <div class="countdown-boxes">
+                <div class="countdown-box">
+                  <span id="sec-cd-days">03</span>
+                  <small>أيام</small>
+                </div>
+                <div class="countdown-sep" style="color:rgba(255,255,255,0.4);">:</div>
+                <div class="countdown-box">
+                  <span id="sec-cd-hours">00</span>
+                  <small>ساعة</small>
+                </div>
+                <div class="countdown-sep" style="color:rgba(255,255,255,0.4);">:</div>
+                <div class="countdown-box">
+                  <span id="sec-cd-mins">00</span>
+                  <small>دقيقة</small>
+                </div>
+                <div class="countdown-sep" style="color:rgba(255,255,255,0.4);">:</div>
+                <div class="countdown-box">
+                  <span id="sec-cd-secs">00</span>
+                  <small>ثانية</small>
+                </div>
+              </div>
             </div>
-            <div class="pricing-header">
-              <p>التسجيل المبكر - وفّر الآن</p>
-              <h2>1,700 <span>ريال</span></h2>
-              <span class="pricing-save-tag"
-                >توفير 300 ريال
-                <i
-                  data-lucide="arrow-down"
-                  style="width: 14px; margin-right: 0.25rem"
-                ></i
-              ></span>
-            </div>
-            <ul class="pricing-features">
-              <li>حضور اليومين التدريبيين كاملة</li>
-              <li>مواد تدريبية احترافية</li>
-              <li>شهادة إتمام معتمدة من إن كيس</li>
-              <li>أطر وأدوات عملية جاهزة للتطبيق</li>
-              <li>الانضمام لمجتمع القادة</li>
-              <li style="color: #fcd34d">
-                أولوية في اختيار المقاعد
-                <i
-                  data-lucide="star"
-                  style="
-                    width: 14px;
-                    margin-right: 0.25rem;
-                    display: inline-block;
-                  "
-                ></i>
-              </li>
-            </ul>
-            <a
-              href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
-              target="_blank"
-              class="pricing-btn-primary"
-              ><i
-                data-lucide="arrow-left"
-                style="
-                  width: 18px;
-                  display: inline-block;
-                  vertical-align: middle;
-                  margin-left: 0.5rem;
-                "
-              ></i>
-              احجز بسعر التسجيل المبكر</a
-            >
           </div>
-          <!-- White Card (Regular Price) -->
-          <div class="pricing-card white-card">
-            <div class="pricing-header">
-              <p>السعر الأساسي</p>
-              <h2>2,000 <span>ريال</span></h2>
-            </div>
-            <ul class="pricing-features">
-              <li>حضور اليومين التدريبيين كاملة</li>
-              <li>مواد تدريبية احترافية</li>
-              <li>شهادة إتمام معتمدة من إن كيس</li>
-              <li>أطر وأدوات عملية جاهزة للتطبيق</li>
-              <li>الانضمام لمجتمع القادة</li>
-            </ul>
-            <a
-              href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
-              target="_blank"
-              class="pricing-btn-outline"
-              >التسجيل بالسعر العادي</a
-            >
-          </div>
+
+          <ul class="price-simple-features" style="margin-top:2rem; position:relative; z-index:1;">
+            <li>حضور اليومين التدريبيين كاملة</li>
+            <li>مواد تدريبية احترافية</li>
+            <li>شهادة إتمام معتمدة من إن كيس</li>
+            <li>أطر وأدوات عملية جاهزة للتطبيق</li>
+            <li>الانضمام لمجتمع القادة</li>
+            <li>أولوية في اختيار المقاعد ⭐</li>
+          </ul>
+
+          <a
+            href="https://calendly.com/ncase-info/meeting-with-ncase-consulting-group"
+            target="_blank"
+            class="price-cta-btn"
+            style="position:relative; z-index:1;"
+          >
+            <i data-lucide="arrow-left" style="width:18px; display:inline-block; vertical-align:middle; margin-left:0.5rem;"></i>
+            احجز مقعدك بسعر الحجز المبكر
+          </a>
         </div>
       </div>
     </section>
@@ -2026,21 +2269,27 @@
               <i data-lucide="map-pin"></i>
             </div>
             <div class="detail-label">المكان</div>
-            <div class="detail-value">[يُضاف قريباً]</div>
+            <div class="detail-value">
+              <a
+                href="https://www.rotana.com/rayhaanhotelandresorts/kingdomofsaudiarabia/riyadh/roshrayhaanbyrotana"
+                target="_blank"
+                class="location-link"
+              >روش ريحان<br />بروتانا - الرياض</a>
+            </div>
           </div>
           <div class="detail-card">
             <div class="detail-icon" style="color: var(--primary)">
               <i data-lucide="calendar"></i>
             </div>
             <div class="detail-label">التاريخ</div>
-            <div class="detail-value">[يُضاف قريباً]</div>
+            <div class="detail-value">24 &amp; 25 أبريل 2026</div>
           </div>
           <div class="detail-card">
             <div class="detail-icon" style="color: var(--primary)">
               <i data-lucide="clock"></i>
             </div>
             <div class="detail-label">التوقيت</div>
-            <div class="detail-value">5م - 10م</div>
+            <div class="detail-value">4:30م - 9:30م</div>
           </div>
           <div class="detail-card">
             <div class="detail-icon" style="color: var(--primary)">
@@ -2123,7 +2372,7 @@
             >
             <i data-lucide="phone"></i>
           </p>
-          <p>الرياض - روشن بيزنس فرونت <i data-lucide="map-pin"></i></p>
+          <p>روش ريحان بروتانا - الرياض <i data-lucide="map-pin"></i></p>
         </div>
       </div>
     </footer>
@@ -2172,12 +2421,71 @@
         const push = document.getElementById("pushNotification");
         if (push) {
           push.classList.add("show");
-
-          // Optionally close it after 15 seconds automatically
-          // setTimeout(() => push.classList.remove('show'), 15000);
         }
         if (window.lucide) window.lucide.createIcons();
       }, 3000);
+    </script>
+
+    <!-- Countdown Timer Script -->
+    <script>
+      (function () {
+        // Use localStorage to persist expiry so it stays fixed for each visitor
+        const STORAGE_KEY = "ncase_early_bird_expiry_v1";
+        const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+
+        let expiry = localStorage.getItem(STORAGE_KEY);
+        if (!expiry) {
+          expiry = Date.now() + THREE_DAYS_MS;
+          localStorage.setItem(STORAGE_KEY, expiry);
+        }
+        expiry = parseInt(expiry);
+
+        function pad(n) {
+          return String(n).padStart(2, "0");
+        }
+
+        function updateCountdown() {
+          const now = Date.now();
+          const diff = expiry - now;
+
+          if (diff <= 0) {
+            // Offer expired - hide countdown, show expired message
+            ["hero-countdown-widget"].forEach((id) => {
+              const el = document.getElementById(id);
+              if (el) el.style.display = "none";
+            });
+            return;
+          }
+
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+          // Hero countdown
+          const hd = document.getElementById("hero-cd-days");
+          const hh = document.getElementById("hero-cd-hours");
+          const hm = document.getElementById("hero-cd-mins");
+          const hs = document.getElementById("hero-cd-secs");
+          if (hd) hd.textContent = pad(days);
+          if (hh) hh.textContent = pad(hours);
+          if (hm) hm.textContent = pad(mins);
+          if (hs) hs.textContent = pad(secs);
+
+          // Section countdown
+          const sd = document.getElementById("sec-cd-days");
+          const sh = document.getElementById("sec-cd-hours");
+          const sm = document.getElementById("sec-cd-mins");
+          const ss = document.getElementById("sec-cd-secs");
+          if (sd) sd.textContent = pad(days);
+          if (sh) sh.textContent = pad(hours);
+          if (sm) sm.textContent = pad(mins);
+          if (ss) ss.textContent = pad(secs);
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      })();
     </script>
   </body>
 </html>

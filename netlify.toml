@@ -1,3 +1,4 @@
 [build]
-  publish = "."
+  publish = "/"
+  command = "echo 'No build command needed'"
   functions = "netlify/functions"

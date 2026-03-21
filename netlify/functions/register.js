@@ -1,0 +1,99 @@
+const querystring = require('querystring');
+const axios = require('axios');
+const { Resend } = require('resend');
+
+exports.handler = async function (event, context) {
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: JSON.stringify({ message: 'Method Not Allowed' }) };
+    }
+
+    let payload = {};
+    if (event.headers['content-type'] && event.headers['content-type'].includes('application/x-www-form-urlencoded')) {
+        payload = querystring.parse(event.body);
+    } else if (event.body) {
+        try { payload = JSON.parse(event.body); } catch (e) { }
+    }
+
+    const { name, whatsapp, jobTitle, details, email } = payload;
+
+    const moyasarSecret = process.env.MOYASAR_SECRET_KEY;
+    if (!moyasarSecret) {
+        return { statusCode: 500, body: JSON.stringify({ message: 'Moyasar Secret Key not configured on the server.' }) };
+    }
+
+    const authHeader = 'Basic ' + Buffer.from(moyasarSecret + ':').toString('base64');
+
+    // URL to redirect users back or to success/failure pages
+    const hostUrl = `https://${event.headers.host}`;
+
+    try {
+        // 1) Send immediate notification to admin that someone initiated checkout
+        const resendApiKey = process.env.RESEND_API_KEY;
+        if (resendApiKey) {
+            const resend = new Resend(resendApiKey);
+
+            const escapeHtml = (str) => String(str || '').replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[m]);
+
+            const safeName = escapeHtml(name);
+            const safeWhatsapp = escapeHtml(whatsapp);
+            const safeEmail = escapeHtml(email);
+            const safeJobTitle = escapeHtml(jobTitle);
+
+            const initiatedEmailHtml = `
+        <div dir="rtl" style="font-family: Arial, sans-serif;">
+            <h3>محاولة تسجيل جديدة (بانتظار إتمام الدفع) ⏱️</h3>
+            <p>قام <strong>${safeName}</strong> بتعبئة النموذج وتم تحويله لصفحة الدفع ميسر.</p>
+            <p>إذا لم تصله رسالة تأكيد الدفع خلال 5 دقائق، يمكنك التواصل معه وسؤاله إذا واجه مشكلة:</p>
+            <ul>
+                <li><strong>الواتساب:</strong> ${safeWhatsapp}</li>
+                <li><strong>البريد:</strong> ${safeEmail}</li>
+                <li><strong>المسمى الوظيفي:</strong> ${safeJobTitle}</li>
+            </ul>
+        </div>
+      `;
+            // Fire & forget the email logic
+            resend.emails.send({
+                from: 'NCASE Notifications <onboarding@resend.dev>',
+                to: 'hello@ibrahemahmed.com',
+                subject: `بانتظار الدفع ⏱️: ${safeName}`,
+                html: initiatedEmailHtml,
+            }).catch(err => console.error('Immediate Email Error:', err));
+        }
+
+        const response = await axios.post('https://api.moyasar.com/v1/invoices', {
+            amount: 170000, // 1700 SAR = 170,000 Halalas
+            currency: 'SAR',
+            description: 'تسجيل - برنامج القيادة وإدارة التغيير',
+            callback_url: `${hostUrl}/api/webhook`, // Will be redirected to /.netlify/functions/webhook
+            success_url: `${hostUrl}/event.html?payment=success`,
+            back_url: `${hostUrl}/event.html?payment=cancelled`,
+            metadata: {
+                name: String(name || ''),
+                email: String(email || ''),
+                whatsapp: String(whatsapp || ''),
+                jobTitle: String(jobTitle || ''),
+                details: String(details || '')
+            }
+        }, {
+            headers: {
+                'Authorization': authHeader,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const invoiceUrl = response.data.url;
+        // Redirect user to the payment link
+        return {
+            statusCode: 302,
+            headers: {
+                Location: invoiceUrl
+            },
+            body: 'Redirecting to checkout...'
+        };
+    } catch (error) {
+        console.error('Moyasar error:', error.response?.data || error.message);
+        return { statusCode: 500, body: JSON.stringify({ message: 'An error occurred creating the invoice.', error: error.response?.data }) };
+    }
+};

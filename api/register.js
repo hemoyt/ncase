@@ -24,21 +24,31 @@ export default async function handler(req, res) {
         const resendApiKey = process.env.RESEND_API_KEY;
         if (resendApiKey) {
             const resend = new Resend(resendApiKey);
+
+            const escapeHtml = (str) => String(str || '').replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[m]);
+
+            const safeName = escapeHtml(name);
+            const safeWhatsapp = escapeHtml(whatsapp);
+            const safeEmail = escapeHtml(email);
+            const safeJobTitle = escapeHtml(jobTitle);
+
             const initiatedEmailHtml = `
         <h3>محاولة تسجيل جديدة (بانتظار إتمام الدفع) ⏱️</h3>
-        <p>قام <strong>${name}</strong> بتعبئة النموذج وتم تحويله لصفحة الدفع ميسر.</p>
+        <p>قام <strong>${safeName}</strong> بتعبئة النموذج وتم تحويله لصفحة الدفع ميسر.</p>
         <p>إذا لم تصله رسالة تأكيد الدفع خلال 5 دقائق، يمكنك التواصل معه وسؤاله إذا واجه مشكلة:</p>
         <ul>
-          <li><strong>الواتساب:</strong> ${whatsapp}</li>
-          <li><strong>البريد:</strong> ${email}</li>
-          <li><strong>المسمى الوظيفي:</strong> ${jobTitle}</li>
+          <li><strong>الواتساب:</strong> ${safeWhatsapp}</li>
+          <li><strong>البريد:</strong> ${safeEmail}</li>
+          <li><strong>المسمى الوظيفي:</strong> ${safeJobTitle}</li>
         </ul>
       `;
             // We don't await this so it doesn't block the checkout redirect!
             resend.emails.send({
                 from: 'NCASE Notifications <onboarding@resend.dev>',
                 to: 'hello@ibrahemahmed.com',
-                subject: `بانتظار الدفع ⏱️: ${name}`,
+                subject: `بانتظار الدفع ⏱️: ${safeName}`,
                 html: initiatedEmailHtml,
             }).catch(err => console.error('Immediate Email Error:', err));
         }

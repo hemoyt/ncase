@@ -2261,6 +2261,276 @@
     });
   </script>
 
+  <!-- ===== PAYMENT SUCCESS OVERLAY ===== -->
+  <style>
+    #paymentSuccessOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, #0E0614 0%, #1a0a2e 50%, #0E0614 100%);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #paymentSuccessOverlay.visible {
+      display: flex;
+    }
+
+    .success-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(124, 48, 151, 0.4);
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 80px rgba(124, 48, 151, 0.25);
+      animation: successCardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes successCardIn {
+      from {
+        transform: scale(0.7) translateY(40px);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .success-icon-wrap {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #7C3097, #9B4DBA);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 0 40px rgba(124, 48, 151, 0.6);
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 40px rgba(124, 48, 151, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 0 70px rgba(124, 48, 151, 0.9);
+      }
+    }
+
+    .success-icon-wrap svg {
+      width: 52px;
+      height: 52px;
+      stroke: #fff;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .checkmark-path {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: drawCheck 0.6s 0.4s ease forwards;
+    }
+
+    @keyframes drawCheck {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .success-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #7C3097, #9B4DBA);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .success-title {
+      color: #fff;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .success-subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .success-invoice-box {
+      background: rgba(124, 48, 151, 0.15);
+      border: 1px solid rgba(124, 48, 151, 0.3);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      direction: rtl;
+    }
+
+    .success-invoice-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .success-invoice-id {
+      color: #C9A84C;
+      font-size: 13px;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+      word-break: break-all;
+    }
+
+    .success-steps {
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 32px;
+    }
+
+    .success-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .success-step-num {
+      background: linear-gradient(135deg, #7C3097, #9B4DBA);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .success-step-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .success-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7C3097, #9B4DBA);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .success-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(124, 48, 151, 0.5);
+    }
+
+    .success-logo {
+      margin-bottom: 20px;
+    }
+
+    .success-logo img {
+      height: 40px;
+      mix-blend-mode: screen;
+    }
+  </style>
+
+  <div id="paymentSuccessOverlay">
+    <div class="success-card">
+      <div class="success-logo">
+        <img src="ncase-logo.png" alt="NCASE Logo" onerror="this.style.display='none'">
+      </div>
+      <div class="success-icon-wrap">
+        <svg viewBox="0 0 52 52">
+          <path class="checkmark-path" d="M14 26 L22 34 L38 18" />
+        </svg>
+      </div>
+      <div class="success-badge">✓ تم الدفع بنجاح</div>
+      <h1 class="success-title">مرحباً بك في البرنامج!</h1>
+      <p class="success-subtitle">
+        تم تأكيد حجزك في <strong style="color:#9B4DBA;">برنامج القيادة وإدارة التغيير في عصر الذكاء
+          الاصطناعي</strong>.<br>
+        سيتم التواصل معك قريباً على رقم الواتساب المُسجَّل.
+      </p>
+      <div class="success-invoice-box">
+        <div class="success-invoice-label">رقم الفاتورة (احتفظ به للمراجعة)</div>
+        <div class="success-invoice-id" id="successInvoiceId">—</div>
+      </div>
+      <div class="success-steps">
+        <div class="success-step">
+          <div class="success-step-num">1</div>
+          <div class="success-step-text">تم إرسال <strong>إيميل تأكيد</strong> إلى بريدك الإلكتروني المُسجَّل</div>
+        </div>
+        <div class="success-step">
+          <div class="success-step-num">2</div>
+          <div class="success-step-text">سيتواصل معك فريق NCASE على الواتساب لتزويدك بكافة التفاصيل</div>
+        </div>
+        <div class="success-step">
+          <div class="success-step-num">3</div>
+          <div class="success-step-text">احتفظ برقم الفاتورة أعلاه كمرجع لحجزك</div>
+        </div>
+      </div>
+      <button class="success-btn" onclick="closeSuccessOverlay()">العودة للصفحة الرئيسية</button>
+    </div>
+  </div>
+
+  <script>
+    // Detect payment success from URL parameters
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get('status');
+      const payment = params.get('payment');
+      const invoiceId = params.get('invoice_id') || params.get('id') || '';
+
+      if (status === 'paid' || payment === 'success') {
+        // Show invoice ID
+        const el = document.getElementById('successInvoiceId');
+        if (el) el.textContent = invoiceId || '—';
+
+        // Show overlay
+        document.getElementById('paymentSuccessOverlay').classList.add('visible');
+
+        // Clean the URL so refreshing doesn't re-show
+        const cleanUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+    })();
+
+    function closeSuccessOverlay() {
+      document.getElementById('paymentSuccessOverlay').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
 </body>
 
 </html>

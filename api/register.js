@@ -1,3 +1,32 @@
+// =========================================================================
+// إعدادات البريد الإلكتروني (Email Settings)
+// =========================================================================
+
+// IMPORTANT: To send emails, you MUST verify your domain (e.g., ncase.com.sa) in Resend.
+// Replace 'info@ncase.com.sa' with your verified sender email from Resend.
+const SENDER_EMAIL = 'NCASE <info@ncase.com.sa>';
+// The admin email where you want to receive new client details
+const ADMIN_EMAIL = 'hello@ibrahemahmed.com';
+
+// -------------------------------------------------------------------------
+// 3. صيغة إيميل محاولة التسجيل (الذي يبدأ عملية الدفع)
+// Admin Initiated Checkout Email Template
+// -------------------------------------------------------------------------
+const adminInitiatedSubject = (name) => `بانتظار الدفع ⏱️: ${name}`;
+const buildAdminInitiatedHtml = (name, whatsapp, email, jobTitle) => `
+  <div dir="rtl" style="font-family: Arial, sans-serif;">
+    <h3>محاولة تسجيل جديدة (بانتظار إتمام الدفع) ⏱️</h3>
+    <p>قام <strong>${name}</strong> بتعبئة النموذج وتم تحويله لصفحة الدفع ميسر.</p>
+    <p>إذا لم تصله رسالة تأكيد الدفع خلال 5 دقائق، يمكنك التواصل معه وسؤاله إذا واجه مشكلة:</p>
+    <ul>
+      <li><strong>الواتساب:</strong> ${whatsapp}</li>
+      <li><strong>البريد:</strong> ${email}</li>
+      <li><strong>المسمى الوظيفي:</strong> ${jobTitle}</li>
+    </ul>
+  </div>
+`;
+// =========================================================================
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method Not Allowed' });
@@ -34,21 +63,13 @@ export default async function handler(req, res) {
             const safeEmail = escapeHtml(email);
             const safeJobTitle = escapeHtml(jobTitle);
 
-            const initiatedEmailHtml = `
-        <h3>محاولة تسجيل جديدة (بانتظار إتمام الدفع) ⏱️</h3>
-        <p>قام <strong>${safeName}</strong> بتعبئة النموذج وتم تحويله لصفحة الدفع ميسر.</p>
-        <p>إذا لم تصله رسالة تأكيد الدفع خلال 5 دقائق، يمكنك التواصل معه وسؤاله إذا واجه مشكلة:</p>
-        <ul>
-          <li><strong>الواتساب:</strong> ${safeWhatsapp}</li>
-          <li><strong>البريد:</strong> ${safeEmail}</li>
-          <li><strong>المسمى الوظيفي:</strong> ${safeJobTitle}</li>
-        </ul>
-      `;
+            const initiatedEmailHtml = buildAdminInitiatedHtml(safeName, safeWhatsapp, safeEmail, safeJobTitle);
+
             // We don't await this so it doesn't block the checkout redirect!
             resend.emails.send({
-                from: 'NCASE Notifications <onboarding@resend.dev>',
-                to: 'hello@ibrahemahmed.com',
-                subject: `بانتظار الدفع ⏱️: ${safeName}`,
+                from: SENDER_EMAIL,
+                to: ADMIN_EMAIL,
+                subject: adminInitiatedSubject(safeName),
                 html: initiatedEmailHtml,
             }).catch(err => console.error('Immediate Email Error:', err));
         }

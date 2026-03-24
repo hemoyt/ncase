@@ -93,7 +93,7 @@ export default async function handler(req, res) {
         }
 
         const response = await axios.post('https://api.moyasar.com/v1/invoices', {
-            amount: 170000, // 1700 SAR = 170,000 Halalas
+            amount: 2000, // 20 SAR = 2,000 Halalas
             currency: 'SAR',
             description: 'تسجيل - برنامج القيادة وإدارة التغيير',
             callback_url: `${hostUrl}/api/webhook`,

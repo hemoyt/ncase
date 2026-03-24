@@ -192,7 +192,7 @@
             <div class="popup-ticket">
                 <div class="popup-price-section">
                     <span class="popup-old-price">2,000</span>
-                    <span class="popup-new-price">1,700<img class="popup-riyal-symbol" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Saudi_Riyal_Symbol.png" alt="ريال"></span>
+                    <span class="popup-new-price">20<img class="popup-riyal-symbol" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Saudi_Riyal_Symbol.png" alt="ريال"></span>
                 </div>
 
                 <div class="popup-divider">

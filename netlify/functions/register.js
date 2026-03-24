@@ -45,15 +45,33 @@ exports.handler = async function (event, context) {
 
     const { name, whatsapp, jobTitle, details, email } = payload;
 
+    // Input validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 100) {
+        return { statusCode: 400, body: JSON.stringify({ message: 'Invalid name' }) };
+    }
+    if (!email || !emailRegex.test(email) || email.length > 200) {
+        return { statusCode: 400, body: JSON.stringify({ message: 'Invalid email' }) };
+    }
+    if (!whatsapp || typeof whatsapp !== 'string' || whatsapp.trim().length === 0 || whatsapp.length > 20) {
+        return { statusCode: 400, body: JSON.stringify({ message: 'Invalid whatsapp' }) };
+    }
+    if (jobTitle && jobTitle.length > 100) {
+        return { statusCode: 400, body: JSON.stringify({ message: 'Job title too long' }) };
+    }
+    if (details && details.length > 500) {
+        return { statusCode: 400, body: JSON.stringify({ message: 'Details too long' }) };
+    }
+
     const moyasarSecret = process.env.MOYASAR_SECRET_KEY;
     if (!moyasarSecret) {
-        return { statusCode: 500, body: JSON.stringify({ message: 'Moyasar Secret Key not configured on the server.' }) };
+        return { statusCode: 500, body: JSON.stringify({ message: 'Server configuration error.' }) };
     }
 
     const authHeader = 'Basic ' + Buffer.from(moyasarSecret + ':').toString('base64');
 
-    // URL to redirect users back or to success/failure pages
-    const hostUrl = `https://${event.headers.host}`;
+    // Use SITE_URL env var to prevent Host header injection
+    const hostUrl = process.env.SITE_URL || `https://${event.headers.host}`;
 
     try {
         // 1) Send immediate notification to admin that someone initiated checkout
@@ -113,6 +131,6 @@ exports.handler = async function (event, context) {
         };
     } catch (error) {
         console.error('Moyasar error:', error.response?.data || error.message);
-        return { statusCode: 500, body: JSON.stringify({ message: 'An error occurred creating the invoice.', error: error.response?.data }) };
+        return { statusCode: 500, body: JSON.stringify({ message: 'An error occurred creating the invoice. Please try again.' }) };
     }
 };

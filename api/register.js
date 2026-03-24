@@ -99,6 +99,7 @@ export default async function handler(req, res) {
             callback_url: `${hostUrl}/api/webhook`,
             success_url: `${hostUrl}/event.html?payment=success`,
             back_url: `${hostUrl}/event.html?payment=cancelled`,
+            secret_token: process.env.MOYASAR_WEBHOOK_SECRET,
             metadata: {
                 name: String(name || ''),
                 email: String(email || ''),

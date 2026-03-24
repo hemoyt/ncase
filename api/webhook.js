@@ -104,6 +104,13 @@ export default async function handler(req, res) {
 
     try {
         const payload = req.body;
+
+        // Verify webhook secret token to ensure request is from Moyasar
+        const webhookSecret = process.env.MOYASAR_WEBHOOK_SECRET;
+        if (webhookSecret && payload.secret_token !== webhookSecret) {
+            return res.status(401).json({ message: 'Invalid secret token' });
+        }
+
         const invoiceId = payload.id;
 
         if (!invoiceId) {

@@ -90,6 +90,12 @@ exports.handler = async function (event, context) {
       return { statusCode: 400, body: JSON.stringify({ message: 'Invalid JSON' }) };
     }
 
+    // Verify webhook secret token to ensure request is from Moyasar
+    const webhookSecret = process.env.MOYASAR_WEBHOOK_SECRET;
+    if (webhookSecret && payload.secret_token !== webhookSecret) {
+      return { statusCode: 401, body: JSON.stringify({ message: 'Invalid secret token' }) };
+    }
+
     const invoiceId = payload.id;
 
     if (!invoiceId) {

@@ -90,6 +90,16 @@ exports.handler = async function (event, context) {
       return { statusCode: 400, body: JSON.stringify({ message: 'Invalid JSON' }) };
     }
 
+    // Verify webhook secret token to ensure request is from Moyasar
+    const webhookSecret = process.env.MOYASAR_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.error('CRITICAL: MOYASAR_WEBHOOK_SECRET is not configured');
+      return { statusCode: 500, body: JSON.stringify({ message: 'Server configuration error' }) };
+    }
+    if (payload.secret_token !== webhookSecret) {
+      return { statusCode: 401, body: JSON.stringify({ message: 'Invalid secret token' }) };
+    }
+
     const invoiceId = payload.id;
 
     if (!invoiceId) {
@@ -176,8 +186,9 @@ END:VALARM
 END:VEVENT
 END:VCALENDAR`;
 
-    // Send email to user (if email exists)
-    if (email) {
+    // Send email to user (if valid email exists)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && emailRegex.test(email)) {
       await resend.emails.send({
         from: SENDER_EMAIL,
         to: email,

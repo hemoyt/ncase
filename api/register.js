@@ -34,15 +34,33 @@ export default async function handler(req, res) {
 
     const { name, whatsapp, jobTitle, details, email } = req.body;
 
+    // Input validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 100) {
+        return res.status(400).json({ message: 'Invalid name' });
+    }
+    if (!email || !emailRegex.test(email) || email.length > 200) {
+        return res.status(400).json({ message: 'Invalid email' });
+    }
+    if (!whatsapp || typeof whatsapp !== 'string' || whatsapp.trim().length === 0 || whatsapp.length > 20) {
+        return res.status(400).json({ message: 'Invalid whatsapp' });
+    }
+    if (jobTitle && jobTitle.length > 100) {
+        return res.status(400).json({ message: 'Job title too long' });
+    }
+    if (details && details.length > 500) {
+        return res.status(400).json({ message: 'Details too long' });
+    }
+
     const moyasarSecret = process.env.MOYASAR_SECRET_KEY;
     if (!moyasarSecret) {
-        return res.status(500).json({ message: 'Moyasar Secret Key not configured on the server.' });
+        return res.status(500).json({ message: 'Server configuration error.' });
     }
 
     const authHeader = 'Basic ' + Buffer.from(moyasarSecret + ':').toString('base64');
 
-    // URL to redirect users back or to success/failure pages
-    const hostUrl = `https://${req.headers.host}`;
+    // Use SITE_URL env var to prevent Host header injection
+    const hostUrl = process.env.SITE_URL || `https://${req.headers.host}`;
 
     try {
         // Dynamic import for Axios and Resend
@@ -100,6 +118,6 @@ export default async function handler(req, res) {
         res.redirect(302, invoiceUrl);
     } catch (error) {
         console.error('Moyasar error:', error.response?.data || error.message);
-        res.status(500).json({ message: 'An error occurred creating the invoice.', error: error.response?.data });
+        res.status(500).json({ message: 'An error occurred creating the invoice. Please try again.' });
     }
 }

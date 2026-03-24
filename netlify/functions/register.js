@@ -107,6 +107,7 @@ exports.handler = async function (event, context) {
             callback_url: `${hostUrl}/api/webhook`, // Will be redirected to /.netlify/functions/webhook
             success_url: `${hostUrl}/event.html?payment=success`,
             back_url: `${hostUrl}/event.html?payment=cancelled`,
+            secret_token: process.env.MOYASAR_WEBHOOK_SECRET,
             metadata: {
                 name: String(name || ''),
                 email: String(email || ''),

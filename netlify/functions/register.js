@@ -64,6 +64,7 @@ exports.handler = async function (event, context) {
     }
 
     const moyasarSecret = process.env.MOYASAR_SECRET_KEY;
+    console.log('KEY_PREFIX:', moyasarSecret ? moyasarSecret.substring(0, 10) : 'NOT SET');
     if (!moyasarSecret) {
         return { statusCode: 500, body: JSON.stringify({ message: 'Server configuration error.' }) };
     }

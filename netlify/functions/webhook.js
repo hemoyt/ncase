@@ -75,6 +75,29 @@ const buildAdminEmailHtml = (invoiceId, name, email, whatsapp, jobTitle, details
     </ul>
   </div>
 `;
+
+// -------------------------------------------------------------------------
+// 3. صيغة إيميل الإدارة عند رفض الدفع (Declined Payment Admin Alert)
+// Declined Payment Notification Template
+// -------------------------------------------------------------------------
+const declinedEmailSubject = (name) => `⚠️ محاولة دفع مرفوضة: ${name}`;
+const buildDeclinedEmailHtml = (invoiceId, name, email, whatsapp, jobTitle, details, amount, status) => `
+  <div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.6;">
+    <h3 style="color: #cc0000;">⚠️ محاولة دفع مرفوضة</h3>
+    <p>حاول مشترك الدفع لكن تم رفض عملية الدفع. يُنصح بالتواصل معه مباشرة.</p>
+    <ul>
+      <li><strong>الاسم:</strong> ${name || 'غير محدد'}</li>
+      <li><strong>البريد الإلكتروني:</strong> ${email || 'غير محدد'}</li>
+      <li><strong>الواتساب:</strong> ${whatsapp || 'غير محدد'}</li>
+      <li><strong>المسمى الوظيفي:</strong> ${jobTitle || 'غير محدد'}</li>
+      <li><strong>جهة العمل/تفاصيل:</strong> ${details || 'غير محدد'}</li>
+      <li><strong>المبلغ الذي حاول الدفع:</strong> ${amount} ريال</li>
+      <li><strong>سبب الرفض (الحالة):</strong> ${status}</li>
+      <li><strong>رقم الفاتورة:</strong> ${invoiceId}</li>
+    </ul>
+    <p style="color: #cc0000;"><strong>يُرجى التواصل مع العميل لمساعدته في إتمام الدفع.</strong></p>
+  </div>
+`;
 // =========================================================================
 
 exports.handler = async function (event, context) {
@@ -123,6 +146,39 @@ exports.handler = async function (event, context) {
     } catch (err) {
       console.error('Failed to verify invoice with Moyasar:', err.message);
       return { statusCode: 400, body: JSON.stringify({ message: 'Invalid invoice' }) };
+    }
+
+    // If payment was declined/failed, send admin an alert email
+    const isDeclined = ['failed', 'declined'].includes(verifiedInvoice.status);
+    if (isDeclined) {
+      const resendApiKey = process.env.RESEND_API_KEY;
+      if (resendApiKey) {
+        const resend = new Resend(resendApiKey);
+        const escapeHtml = (str) => String(str || '').replace(/[&<>"']/g, m => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[m]);
+        const metadata = verifiedInvoice.metadata || {};
+        const { name, email, whatsapp, jobTitle, details } = metadata;
+        const amount = verifiedInvoice.amount / 100;
+        const declinedHtml = buildDeclinedEmailHtml(
+          escapeHtml(invoiceId),
+          escapeHtml(name),
+          escapeHtml(email),
+          escapeHtml(whatsapp),
+          escapeHtml(jobTitle),
+          escapeHtml(details || 'غير محدد'),
+          amount,
+          verifiedInvoice.status
+        );
+        await resend.emails.send({
+          from: SENDER_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: declinedEmailSubject(escapeHtml(name) || 'عميل غير معروف'),
+          html: declinedHtml,
+        });
+        console.log('Declined payment notification sent to admin.');
+      }
+      return { statusCode: 200, body: JSON.stringify({ received: true, status: verifiedInvoice.status }) };
     }
 
     if (verifiedInvoice.status !== 'paid') {

@@ -97,7 +97,16 @@
             font-weight: 800;
             color: #2d2d2d;
             line-height: 1.1;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .popup-riyal-symbol {
+            height: 0.75em;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         /* Program title */
@@ -178,12 +187,12 @@
         <div id="event-promo-popup">
             <button id="close-promo-popup" aria-label="أغلق">&times;</button>
 
-            <div class="popup-banner">التسجيل المبكّر وفّر 300 ريال</div>
+            <div class="popup-banner">وفّر 300 ريال عند التسجيل مبكرًا</div>
 
             <div class="popup-ticket">
                 <div class="popup-price-section">
                     <span class="popup-old-price">2,000</span>
-                    <span class="popup-new-price">&#65020;1,700</span>
+                    <span class="popup-new-price">1,700<img class="popup-riyal-symbol" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Saudi_Riyal_Symbol.png" alt="ريال"></span>
                 </div>
 
                 <div class="popup-divider">

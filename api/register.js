@@ -6,7 +6,7 @@
 // Replace 'info@ncase.com.sa' with your verified sender email from Resend.
 const SENDER_EMAIL = 'NCASE <info@ncase.com.sa>';
 // The admin email where you want to receive new client details
-const ADMIN_EMAIL = 'hello@ibrahemahmed.com';
+const ADMIN_EMAIL = 'info@ncase.com.sa';
 
 // -------------------------------------------------------------------------
 // 3. صيغة إيميل محاولة التسجيل (الذي يبدأ عملية الدفع)

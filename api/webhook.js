@@ -13,7 +13,7 @@ const ADMIN_EMAIL = 'info@ncase.com.sa';
 // Customer Confirmation Email Template
 // -------------------------------------------------------------------------
 const customerEmailSubject = 'تأكيد التسجيل والدفع - برنامج القيادة وإدارة التغيير';
-const buildCustomerEmailHtml = (name, amount, whatsapp) => `
+const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
   <div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.6;">
     <div style="text-align: center; margin-bottom: 20px;">
       <img src="https://ncase.com.sa/image/%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A8%D8%AF%D9%88%D9%86%20%D8%B9%D9%86%D9%88%D8%A7%D9%86.png" alt="NCASE Logo" style="max-width: 200px;" />
@@ -21,6 +21,9 @@ const buildCustomerEmailHtml = (name, amount, whatsapp) => `
     <h3>مرحباً ${name}،</h3>
     <p>نشكرك على تسجيلك في <strong>برنامج القيادة وإدارة التغيير</strong>.</p>
     <p>لقد استلمنا المبلغ (${amount} ريال) بنجاح، وتم تأكيد حجزك في البرنامج.</p>
+    <div style="text-align: center; margin: 20px 0;">
+      <a href="${invoiceUrl}" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">عرض الفاتورة</a>
+    </div>
     <p>سنقوم بالتواصل معك قريباً على رقم الواتساب (${whatsapp}) لتزويدك بكافة التفاصيل والتعليمات.</p>
 
     <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
@@ -196,8 +199,9 @@ export default async function handler(req, res) {
         const safeJobTitle = escapeHtml(jobTitle);
         const safeDetails = escapeHtml(details || 'غير محدد');
 
+        const invoiceUrl = verifiedInvoice.url || `https://moyasar.com/invoices/${invoiceId}`;
         const ownerEmailHtml = buildAdminEmailHtml(escapeHtml(invoiceId), safeName, safeEmail, safeWhatsapp, safeJobTitle, safeDetails, amount);
-        const userEmailHtml = buildCustomerEmailHtml(safeName, amount, safeWhatsapp);
+        const userEmailHtml = buildCustomerEmailHtml(safeName, amount, safeWhatsapp, invoiceUrl);
 
         // Send email to owner
         await resend.emails.send({
@@ -207,6 +211,27 @@ export default async function handler(req, res) {
             html: ownerEmailHtml,
         });
 
+        // ics file content
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+SUMMARY:برنامج القيادة وإدارة التغيير - NCASE
+DTSTART:20260424T133000Z
+DTEND:20260424T183000Z
+RRULE:FREQ=DAILY;COUNT=2
+LOCATION:Hilton Hotel, Riyadh
+DESCRIPTION:برنامج القيادة وإدارة التغيير من NCASE
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT15M
+DESCRIPTION:تذكير ببرنامج القيادة وإدارة التغيير
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
         // Send email to user (if email exists)
         if (email) {
             await resend.emails.send({
@@ -214,6 +239,12 @@ export default async function handler(req, res) {
                 to: email,
                 subject: customerEmailSubject,
                 html: userEmailHtml,
+                attachments: [
+                    {
+                        filename: 'event.ics',
+                        content: Buffer.from(icsContent, 'utf-8')
+                    }
+                ]
             });
         }
 

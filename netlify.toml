@@ -4,6 +4,18 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "/api/webhook"
+  to = "/.netlify/functions/webhook"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/register"
+  to = "/.netlify/functions/register"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301

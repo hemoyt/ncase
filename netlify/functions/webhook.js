@@ -40,7 +40,7 @@ const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
       <!-- Event Details -->
       <div style="background-color: #f5eefa; padding: 20px; border-radius: 10px; margin: 24px 0; border-right: 4px solid #7C3097;">
         <h3 style="margin-top: 0; color: #7C3097;">📅 تفاصيل البرنامج</h3>
-        <p style="margin: 6px 0;">📍 <strong>المكان:</strong> فندق هيلتون — الرياض</p>
+        <p style="margin: 6px 0;">📍 <strong>المكان:</strong> <a href="https://www.google.com/maps/place/%D8%B1%D9%88%D8%B4+%D8%B1%D9%8A%D8%AD%D8%A7%D9%86+%D9%85%D9%86+%D8%B1%D9%88%D8%AA%D8%A7%D9%86%D8%A7%E2%80%AD/@24.7004029,46.6819706,17z" style="color: #7C3097;">روش ريحان من روتانا — الرياض</a></p>
         <p style="margin: 6px 0;">🗓️ <strong>التواريخ:</strong> الجمعة 24 أبريل والسبت 25 أبريل 2026</p>
         <p style="margin: 6px 0;">🕓 <strong>الوقت:</strong> 4:30 مساءً — 9:30 مساءً (5 ساعات يومياً)</p>
       </div>
@@ -70,7 +70,7 @@ const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
           </tr>
         </table>
         <div style="text-align: center; margin-top: 14px;">
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=برنامج+القيادة+وإدارة+التغيير+%28اليوم+1%29+-+NCASE&dates=20260424T133000Z/20260424T183000Z&details=برنامج+القيادة+وإدارة+التغيير+من+NCASE+-+فندق+هيلتون+الرياض&location=Hilton+Hotel,+Riyadh" style="background-color: #7C3097; color: #ffffff; padding: 9px 18px; text-decoration: none; border-radius: 6px; font-size: 13px; display: inline-block;">➕ أضف اليوم الأول للتقويم</a>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=برنامج+القيادة+وإدارة+التغيير+%28اليوم+1%29+-+NCASE&dates=20260424T133000Z/20260424T183000Z&details=برنامج+القيادة+وإدارة+التغيير+من+NCASE+-+فندق+هيلتون+الرياض&location=Rosh+Rayhaan+by+Rotana,+Riyadh" style="background-color: #7C3097; color: #ffffff; padding: 9px 18px; text-decoration: none; border-radius: 6px; font-size: 13px; display: inline-block;">➕ أضف اليوم الأول للتقويم</a>
         </div>
       </div>
 
@@ -96,7 +96,7 @@ const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
           </tr>
         </table>
         <div style="text-align: center; margin-top: 14px;">
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=برنامج+القيادة+وإدارة+التغيير+%28اليوم+2%29+-+NCASE&dates=20260425T133000Z/20260425T183000Z&details=برنامج+القيادة+وإدارة+التغيير+من+NCASE+-+فندق+هيلتون+الرياض&location=Hilton+Hotel,+Riyadh" style="background-color: #7C3097; color: #ffffff; padding: 9px 18px; text-decoration: none; border-radius: 6px; font-size: 13px; display: inline-block;">➕ أضف اليوم الثاني للتقويم</a>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=برنامج+القيادة+وإدارة+التغيير+%28اليوم+2%29+-+NCASE&dates=20260425T133000Z/20260425T183000Z&details=برنامج+القيادة+وإدارة+التغيير+من+NCASE+-+فندق+هيلتون+الرياض&location=Rosh+Rayhaan+by+Rotana,+Riyadh" style="background-color: #7C3097; color: #ffffff; padding: 9px 18px; text-decoration: none; border-radius: 6px; font-size: 13px; display: inline-block;">➕ أضف اليوم الثاني للتقويم</a>
         </div>
       </div>
 
@@ -309,8 +309,8 @@ UID:ncase-event-day1-20260424@ncase.com.sa
 SUMMARY:برنامج القيادة وإدارة التغيير - اليوم الأول - NCASE
 DTSTART:20260424T133000Z
 DTEND:20260424T183000Z
-LOCATION:Hilton Hotel\\, Riyadh
-DESCRIPTION:برنامج القيادة وإدارة التغيير من NCASE - اليوم الأول\\nفندق هيلتون\\, الرياض\\n4:30 م - 9:30 م
+LOCATION:Rosh Rayhaan by Rotana\\, Riyadh
+DESCRIPTION:برنامج القيادة وإدارة التغيير من NCASE - اليوم الأول\\nروش ريحان من روتانا\\, الرياض\\n4:30 م - 9:30 م
 STATUS:CONFIRMED
 SEQUENCE:0
 BEGIN:VALARM
@@ -334,8 +334,8 @@ UID:ncase-event-day2-20260425@ncase.com.sa
 SUMMARY:برنامج القيادة وإدارة التغيير - اليوم الثاني - NCASE
 DTSTART:20260425T133000Z
 DTEND:20260425T183000Z
-LOCATION:Hilton Hotel\\, Riyadh
-DESCRIPTION:برنامج القيادة وإدارة التغيير من NCASE - اليوم الثاني\\nفندق هيلتون\\, الرياض\\n4:30 م - 9:30 م
+LOCATION:Rosh Rayhaan by Rotana\\, Riyadh
+DESCRIPTION:برنامج القيادة وإدارة التغيير من NCASE - اليوم الثاني\\nروش ريحان من روتانا\\, الرياض\\n4:30 م - 9:30 م
 STATUS:CONFIRMED
 SEQUENCE:0
 BEGIN:VALARM

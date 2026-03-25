@@ -206,7 +206,7 @@
             </div>
 
             <div class="popup-bottom">
-                <a href="event.html" class="popup-cta">احجز مقعدك الآن</a>
+                <a href="event.html#register" class="popup-cta" onclick="if(typeof openRegisterModal==='function'){event.preventDefault();openRegisterModal();}">احجز مقعدك الآن</a>
             </div>
         </div>
     </div>

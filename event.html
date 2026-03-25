@@ -2252,6 +2252,9 @@
     function closeRegisterModal() {
       document.getElementById('registerModal').style.display = 'none';
     }
+    if (window.location.hash === '#register') {
+      openRegisterModal();
+    }
 
     // Close when clicking outside modal content
     document.getElementById('registerModal').addEventListener('click', function (e) {

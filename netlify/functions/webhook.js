@@ -61,7 +61,7 @@ const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
             <td style="padding: 8px 12px;">الجلسة الأولى — مفاهيم القيادة وإدارة التغيير</td>
           </tr>
           <tr style="border-bottom: 1px solid #f0e6f8;">
-            <td style="padding: 8px 4px; color: #7C3097; white-space: nowrap;"><strong>7:00 م</strong></td>
+            <td style="padding: 8px 4px; color: #7C3097; white-space: nowrap;"><strong>6:30 م</strong></td>
             <td style="padding: 8px 12px;">استراحة</td>
           </tr>
           <tr>
@@ -87,7 +87,7 @@ const buildCustomerEmailHtml = (name, amount, whatsapp, invoiceUrl) => `
             <td style="padding: 8px 12px;">الجلسة الثالثة — استراتيجيات التغيير المؤسسي</td>
           </tr>
           <tr style="border-bottom: 1px solid #f0e6f8;">
-            <td style="padding: 8px 4px; color: #7C3097; white-space: nowrap;"><strong>7:00 م</strong></td>
+            <td style="padding: 8px 4px; color: #7C3097; white-space: nowrap;"><strong>6:30 م</strong></td>
             <td style="padding: 8px 12px;">استراحة</td>
           </tr>
           <tr>

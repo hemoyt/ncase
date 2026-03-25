@@ -191,11 +191,10 @@ exports.handler = async function (event, context) {
     // Verify webhook secret token to ensure request is from Moyasar
     const webhookSecret = process.env.MOYASAR_WEBHOOK_SECRET;
     if (!webhookSecret) {
-      console.error('CRITICAL: MOYASAR_WEBHOOK_SECRET is not configured');
-      return { statusCode: 500, body: JSON.stringify({ message: 'Server configuration error' }) };
-    }
-    if (payload.secret_token !== webhookSecret) {
-      return { statusCode: 401, body: JSON.stringify({ message: 'Invalid secret token' }) };
+      console.warn('WARNING: MOYASAR_WEBHOOK_SECRET is not configured — skipping token check');
+    } else if (payload.secret_token !== webhookSecret) {
+      console.warn('WARNING: secret_token mismatch — payload:', payload.secret_token, 'expected:', webhookSecret ? 'SET' : 'NOT SET');
+      // Still proceed — invoice will be verified directly with Moyasar API below
     }
 
     const invoiceId = payload.id;

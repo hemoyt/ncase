@@ -77,6 +77,9 @@ exports.handler = async function (event, context) {
     try {
         // 1) Send immediate notification to admin that someone initiated checkout
         const resendApiKey = process.env.RESEND_API_KEY;
+        if (!resendApiKey) {
+            console.error('RESEND_API_KEY is not set — skipping admin initiated email');
+        }
         if (resendApiKey) {
             const resend = new Resend(resendApiKey);
 

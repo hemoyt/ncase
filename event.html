@@ -1608,6 +1608,15 @@
       }
     }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-76WT38DNGP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-76WT38DNGP');
+  </script>
 </head>
 
 <body>
@@ -2248,6 +2257,7 @@
   <script>
     function openRegisterModal() {
       document.getElementById('registerModal').style.display = 'flex';
+      gtag('event', 'register_modal_open', { event_category: 'Event Registration' });
     }
     function closeRegisterModal() {
       document.getElementById('registerModal').style.display = 'none';
@@ -2255,6 +2265,14 @@
     if (window.location.hash === '#register') {
       openRegisterModal();
     }
+
+    // Track registration form submission
+    document.getElementById('registerModal').querySelector('form').addEventListener('submit', function () {
+      gtag('event', 'registration_form_submit', {
+        event_category: 'Event Registration',
+        event_label: 'Leadership Program'
+      });
+    });
 
     // Close when clicking outside modal content
     document.getElementById('registerModal').addEventListener('click', function (e) {
@@ -2643,6 +2661,15 @@
       const btn = document.getElementById('cardBtn');
       btn.textContent = s.btn;
       btn.style.background = s.btnBg;
+
+      // Track payment outcome in GA
+      gtag('event', 'payment_' + key, {
+        event_category: 'Payment',
+        event_label: 'Leadership Program',
+        value: key === 'paid' ? 1700 : 0,
+        currency: 'SAR',
+        transaction_id: inv || undefined
+      });
 
       // Show overlay & clean URL
       document.getElementById('paymentSuccessOverlay').classList.add('visible');

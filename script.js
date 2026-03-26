@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Language buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function () {
+            gtag('event', 'language_switch', { event_category: 'UI', event_label: this.dataset.lang });
             setLanguage(this.dataset.lang);
         });
     });
@@ -208,6 +209,9 @@ document.addEventListener('DOMContentLoaded', function () {
         question.addEventListener('click', function () {
             const answer = this.nextElementSibling;
             const isActive = this.classList.contains('active');
+            if (!isActive) {
+                gtag('event', 'faq_open', { event_category: 'Engagement', event_label: this.textContent.trim().slice(0, 60) });
+            }
 
             // Close all other FAQ items
             faqQuestions.forEach(q => {
@@ -299,6 +303,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const successMessage = document.getElementById('formSuccessMessage');
             successMessage.style.display = 'none';
 
+            // Track form submission
+            gtag('event', 'contact_form_submit', {
+                event_category: 'Lead',
+                event_label: data.service || 'unknown'
+            });
+
             // Send data to webhook
             fetch('https://agent.hemoagent.site/webhook/b92633f9-3fff-431b-837c-277c42e58b77', {
                 method: 'POST',
@@ -349,6 +359,8 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
 
             const email = this.querySelector('input[type="email"]').value;
+
+            gtag('event', 'newsletter_subscribe', { event_category: 'Engagement' });
 
             // Here you would normally send the email to a server
             console.log('Subscribe:', email);

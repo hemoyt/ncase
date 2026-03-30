@@ -7,7 +7,7 @@
             position: fixed;
             inset: 0;
             z-index: 999998;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -23,161 +23,197 @@
             font-family: 'Tajawal', 'Cairo', sans-serif;
             direction: rtl;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             border-radius: 20px;
-            overflow: visible;
-            transform: scale(0.85) translateY(30px);
+            overflow: hidden;
+            transform: scale(0.88) translateY(28px);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 20px 48px rgba(0,0,0,0.45));
         }
         #event-promo-overlay.visible #event-promo-popup {
             transform: scale(1) translateY(0);
         }
 
-        /* Top purple banner */
-        .popup-banner {
+        /* ── Header bar ── */
+        .pp-header {
             background: #5B2082;
-            color: #fff;
-            text-align: center;
-            padding: 10px 20px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 20px 20px 0 0;
-            letter-spacing: 0.3px;
-        }
-
-        /* Ticket white body */
-        .popup-ticket {
-            background: #fff;
-            padding: 24px 28px 28px;
-            position: relative;
-        }
-
-        /* Ticket notch separating price from content */
-        .popup-divider {
-            position: relative;
-            margin: 18px 0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px 12px 14px;
         }
-        .popup-divider::before,
-        .popup-divider::after {
-            content: '';
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .popup-divider::before { right: -40px; }
-        .popup-divider::after  { left: -40px; }
-        .popup-divider-line {
+        .pp-header-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
             flex: 1;
-            border: none;
-            border-top: 2.5px dashed #d0d0d0;
-        }
-
-        /* Price section */
-        .popup-price-section {
             text-align: center;
-            padding: 4px 0 0;
         }
-        .popup-old-price {
-            font-size: 22px;
-            color: #aaa;
-            text-decoration: line-through;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 2px;
-        }
-        .popup-new-price {
-            font-size: 46px;
-            font-weight: 800;
-            color: #2d2d2d;
-            line-height: 1.1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .popup-riyal-symbol {
-            height: 0.75em;
-            width: auto;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        /* Program title */
-        .popup-title {
-            text-align: center;
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a1a1a;
-            line-height: 1.5;
-            margin: 6px 0 20px;
-        }
-        .popup-title span {
-            color: #5B2082;
-        }
-
-        /* CTA button */
-        .popup-cta {
-            display: block;
-            text-align: center;
-            background: #5B2082;
-            color: #fff;
-            text-decoration: none;
-            padding: 16px 20px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
-            transition: background 0.25s, transform 0.2s;
-            border-radius: 0 0 16px 16px;
-        }
-        .popup-cta:hover {
-            background: #4a1a6e;
-            transform: translateY(-1px);
-        }
-
-        /* Bottom rounded ticket shape */
-        .popup-bottom {
-            background: #5B2082;
-            border-radius: 0 0 20px 20px;
-        }
-
-        /* Close button */
         #close-promo-popup {
-            position: absolute;
-            top: -14px;
-            left: -14px;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            background: #fff;
-            border: 2px solid #5B2082;
-            color: #5B2082;
+            background: rgba(255,255,255,0.18);
+            border: none;
+            color: #fff;
             font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
             line-height: 1;
-            transition: background 0.2s, color 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+            flex-shrink: 0;
         }
-        #close-promo-popup:hover {
+        #close-promo-popup:hover { background: rgba(255,255,255,0.32); }
+
+        /* ── White body ── */
+        .pp-body {
+            background: #fff;
+            padding: 22px 26px 20px;
+        }
+
+        /* Prices */
+        .pp-old-price {
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: #aaa;
+            text-decoration: line-through;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .pp-new-price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 50px;
+            font-weight: 900;
+            color: #1a1a1a;
+            line-height: 1.1;
+            direction: ltr;
+        }
+        .pp-riyal-symbol {
+            height: 0.7em;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            filter: brightness(0);
+        }
+
+        /* Dashed divider */
+        .pp-divider {
+            position: relative;
+            margin: 18px 0;
+            display: flex;
+            align-items: center;
+        }
+        .pp-divider::before,
+        .pp-divider::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #f5f0fa;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .pp-divider::before { right: -32px; }
+        .pp-divider::after  { left: -32px; }
+        .pp-divider-line {
+            flex: 1;
+            border: none;
+            border-top: 2px dashed #d4c0e8;
+        }
+
+        /* Program title */
+        .pp-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a1a;
+            line-height: 1.55;
+            margin: 0 0 16px;
+        }
+        .pp-title span { color: #5B2082; }
+
+        /* Countdown box */
+        .pp-countdown-box {
+            background: #f3ecfb;
+            border-radius: 14px;
+            padding: 14px 16px 12px;
+            margin-bottom: 4px;
+        }
+        .pp-countdown-label {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #5B2082;
+            margin-bottom: 10px;
+        }
+        .pp-countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 6px;
+            direction: ltr;
+        }
+        .pp-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 48px;
+        }
+        .pp-unit-num {
+            font-size: 34px;
+            font-weight: 900;
+            color: #c9a400;
+            line-height: 1;
+        }
+        .pp-unit-label {
+            font-size: 11px;
+            color: #5B2082;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        .pp-colon {
+            font-size: 30px;
+            font-weight: 900;
+            color: #c9a400;
+            padding-top: 2px;
+        }
+        .pp-countdown-date {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* CTA button */
+        .pp-cta {
+            display: block;
+            text-align: center;
             background: #5B2082;
             color: #fff;
+            text-decoration: none;
+            padding: 17px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.25s;
+            border: none;
+            width: 100%;
         }
+        .pp-cta:hover { background: #4a1a6e; }
 
         @media (max-width: 480px) {
             #event-promo-popup { max-width: 100%; }
-            .popup-new-price { font-size: 38px; }
-            .popup-title { font-size: 19px; }
-            .popup-banner { font-size: 13px; }
+            .pp-new-price { font-size: 40px; }
+            .pp-title { font-size: 16px; }
+            .pp-unit-num { font-size: 28px; }
         }
     `;
     document.head.appendChild(style);
@@ -185,34 +221,88 @@
     const popupHtml = `
     <div id="event-promo-overlay">
         <div id="event-promo-popup">
-            <button id="close-promo-popup" aria-label="أغلق">&times;</button>
 
-            <div class="popup-banner">وفّر 300 ريال عند التسجيل مبكرًا</div>
+            <div class="pp-header">
+                <div class="pp-header-title">وفّر 300 ريال عند التسجيل مبكرًا</div>
+                <button id="close-promo-popup" aria-label="أغلق">&times;</button>
+            </div>
 
-            <div class="popup-ticket">
-                <div class="popup-price-section">
-                    <span class="popup-old-price">2,000</span>
-                    <span class="popup-new-price">1,700<img class="popup-riyal-symbol" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Saudi_Riyal_Symbol.png" alt="ريال"></span>
+            <div class="pp-body">
+                <span class="pp-old-price">2,000</span>
+                <div class="pp-new-price">
+                    <img class="pp-riyal-symbol" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Saudi_Riyal_Symbol.png" alt="ريال">
+                    1,700
                 </div>
 
-                <div class="popup-divider">
-                    <hr class="popup-divider-line">
-                </div>
+                <div class="pp-divider"><hr class="pp-divider-line"></div>
 
-                <div class="popup-title">
+                <div class="pp-title">
                     برنامج القيادة وإدارة التغيير<br>
                     في عصر <span>الذكاء الاصطناعي</span>
                 </div>
+
+                <div class="pp-countdown-box">
+                    <div class="pp-countdown-label">⏳ ينتهي العرض خلال</div>
+                    <div class="pp-countdown-timer">
+                        <div class="pp-unit">
+                            <span class="pp-unit-num" id="pp-days">00</span>
+                            <span class="pp-unit-label">يوم</span>
+                        </div>
+                        <span class="pp-colon">:</span>
+                        <div class="pp-unit">
+                            <span class="pp-unit-num" id="pp-hours">00</span>
+                            <span class="pp-unit-label">ساعة</span>
+                        </div>
+                        <span class="pp-colon">:</span>
+                        <div class="pp-unit">
+                            <span class="pp-unit-num" id="pp-minutes">00</span>
+                            <span class="pp-unit-label">دقيقة</span>
+                        </div>
+                        <span class="pp-colon">:</span>
+                        <div class="pp-unit">
+                            <span class="pp-unit-num" id="pp-seconds">00</span>
+                            <span class="pp-unit-label">ثانية</span>
+                        </div>
+                    </div>
+                    <div class="pp-countdown-date">الخميس ٩ أبريل ٢٠٢٦ — الساعة ١١:٥٩ مساءً</div>
+                </div>
             </div>
 
-            <div class="popup-bottom">
-                <a href="event.html#register" class="popup-cta" onclick="if(typeof openRegisterModal==='function'){event.preventDefault();openRegisterModal();}">احجز مقعدك الآن</a>
-            </div>
+            <button class="pp-cta" onclick="if(typeof openRegisterModal==='function'){openRegisterModal();}else{window.location.href='event.html#register';}">احجز مقعدك الآن</button>
+
         </div>
     </div>
     `;
 
     document.body.insertAdjacentHTML('beforeend', popupHtml);
+
+    // Countdown target: April 9, 2026 23:59:00 Saudi time (UTC+3)
+    const targetDate = new Date('2026-04-09T23:59:00+03:00');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        if (diff <= 0) {
+            document.getElementById('pp-days').textContent = '00';
+            document.getElementById('pp-hours').textContent = '00';
+            document.getElementById('pp-minutes').textContent = '00';
+            document.getElementById('pp-seconds').textContent = '00';
+            return;
+        }
+        const days    = Math.floor(diff / 86400000);
+        const hours   = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        document.getElementById('pp-days').textContent    = pad(days);
+        document.getElementById('pp-hours').textContent   = pad(hours);
+        document.getElementById('pp-minutes').textContent = pad(minutes);
+        document.getElementById('pp-seconds').textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
 
     const overlay = document.getElementById('event-promo-overlay');
 
@@ -220,15 +310,17 @@
         overlay.classList.add('visible');
     }, 1500);
 
-    document.getElementById('close-promo-popup').addEventListener('click', () => {
+    function closePopup() {
         overlay.classList.remove('visible');
-        setTimeout(() => overlay.remove(), 400);
-    });
+        setTimeout(() => {
+            overlay.remove();
+            clearInterval(countdownInterval);
+        }, 400);
+    }
+
+    document.getElementById('close-promo-popup').addEventListener('click', closePopup);
 
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.classList.remove('visible');
-            setTimeout(() => overlay.remove(), 400);
-        }
+        if (e.target === overlay) closePopup();
     });
 })();

@@ -13,7 +13,7 @@
             justify-content: center;
             padding: 16px;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.6s ease;
         }
         #event-promo-overlay.visible {
             opacity: 1;
@@ -26,12 +26,12 @@
             max-width: 400px;
             border-radius: 20px;
             overflow: hidden;
-            transform: scale(0.88) translateY(28px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(80px);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             filter: drop-shadow(0 20px 48px rgba(0,0,0,0.45));
         }
         #event-promo-overlay.visible #event-promo-popup {
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
         }
 
         /* ── Header bar ── */
@@ -308,7 +308,7 @@
 
     setTimeout(() => {
         overlay.classList.add('visible');
-    }, 1500);
+    }, 5000);
 
     function closePopup() {
         overlay.classList.remove('visible');

@@ -264,7 +264,7 @@
                             <span class="pp-unit-label">ثانية</span>
                         </div>
                     </div>
-                    <div class="pp-countdown-date">الخميس ٩ أبريل ٢٠٢٦ — الساعة ١١:٥٩ مساءً</div>
+                    <div class="pp-countdown-date">الأربعاء ١٥ أبريل ٢٠٢٦ — الساعة ١١:٥٩ مساءً</div>
                 </div>
             </div>
 
@@ -276,8 +276,8 @@
 
     document.body.insertAdjacentHTML('beforeend', popupHtml);
 
-    // Countdown target: April 9, 2026 23:59:00 Saudi time (UTC+3)
-    const targetDate = new Date('2026-04-09T23:59:00+03:00');
+    // Countdown target: April 15, 2026 23:59:00 Saudi time (UTC+3)
+    const targetDate = new Date('2026-04-15T23:59:00+03:00');
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
